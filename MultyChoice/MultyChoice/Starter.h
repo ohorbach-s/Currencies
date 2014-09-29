@@ -11,7 +11,7 @@
 #import "RTAppDelegate.h"
 #import "CurrencyInfo.h"
 #import "RateHistory.h"
-//#import "LastDate.h"
+#import "UsedData.h"
 
 
 
@@ -21,7 +21,7 @@
 @property(nonatomic, strong) NSArray *fullNames;
 @property(nonatomic, strong) NSArray *flags;
 
--(id) initStarter;
+
 -(void) firstLoad;
 
 @end

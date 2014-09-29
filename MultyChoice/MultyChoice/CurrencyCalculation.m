@@ -11,7 +11,7 @@
 @implementation CurrencyCalculation
 
 
--(double) convertNumber: (NSString *)amount OfCurrency: (NSString *)mainCurrency into: (NSString *)currency
+-(double) convertNumber: (NSString *)amount OfCurrency: (NSString *)mainCurrency into: (NSString *)currency    // performing the calculation depending on the entered amount of the main currency
 {
     
     double number = [amount doubleValue];
