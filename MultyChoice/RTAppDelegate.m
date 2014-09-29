@@ -7,7 +7,8 @@
 //
 
 #import "RTAppDelegate.h"
-#import "RTViewController.h"
+
+
 
 @implementation RTAppDelegate
 
@@ -18,30 +19,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     
-    [application setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
-    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"wood-wallpaper.png"] forBarMetrics:UIBarMetricsDefault];
+        // Override point for customization after application launch.
     return YES;
-}
-
--(void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler{
-    
-    
-    NSDate *fetchStart = [NSDate date];
-    
-    UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
-    
-    RTViewController *viewController =[[navigationController viewControllers] firstObject];
-    
-    [viewController backgroundRefresh:^(UIBackgroundFetchResult result){
-        completionHandler(result);
-        NSDate *fetchEnd = [NSDate date];
-        
-        NSTimeInterval timeElapsed = [fetchEnd timeIntervalSinceDate:fetchStart];
-        
-        NSLog(@"Background Fetch Duration: %f seconds", timeElapsed);
-        
-       
-    }];
 }
 
 

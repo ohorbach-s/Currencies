@@ -13,9 +13,8 @@
 #import "RTTableViewCell.h"
 #import "ParcingYahoo.h"
 #import "RTAppDelegate.h"
+
 #import "CurrencyCalculation.h"
-#import "WorkWithDB.h"
-#import "ParsingSynchronous.h"
 
 
 
@@ -28,9 +27,7 @@
 @property (strong, nonatomic) ParcingYahoo *converter;
 @property (weak, nonatomic) IBOutlet UITextField *howMuch;
 
-
 - (IBAction)endEditing:(id)sender;
--(IBAction)refreshTableView:(id)sender;
-- (void) backgroundRefresh:(void (^)(UIBackgroundFetchResult))completionHanler;
+- (IBAction)refreshTableView:(id)sender;
 
 @end

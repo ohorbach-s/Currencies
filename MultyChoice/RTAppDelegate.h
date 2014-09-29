@@ -7,9 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-//#import "RTViewController.h"
 
-@class  RTViewController;
 @interface RTAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
@@ -19,5 +17,5 @@
 
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
--(void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler;
+
 @end

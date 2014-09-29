@@ -13,7 +13,6 @@
 {
     unsigned int rtAmount;
     Starter *createDB;
-    NSNumber *indexMain;
 }
 
 @end
@@ -26,13 +25,12 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"wood-wallpaper.png"]];
     _myTableView.backgroundColor = [UIColor clearColor];
-    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
     self.converter = [ParcingYahoo new];
-    self.howMuch.text = @"1";                                                                         //the initial amount of currency-to-convert
+    self.howMuch.text = @"1";                 //the initial amount of currency-to-convert
     
-    createDB = [Starter new];
+    createDB = [[Starter alloc]initStarter];
 
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"HasLaunchedOnce"]){                       //if the app has been already launched
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"HasLaunchedOnce"]){           //if the app has been already launched
         
         NSLog(@"DB isn't empty!");
         
@@ -43,15 +41,15 @@
         NSEntityDescription *entityDesc = [NSEntityDescription entityForName:@"CurrencyInfo"
                                                       inManagedObjectContext:context];
         [req setEntity:entityDesc];
-        NSPredicate *pred = [NSPredicate predicateWithFormat:@"(checked == %@)", @1];                  //set the predicate to get only those items which are selected with checkmarks
-        [req setPredicate:pred];                                                                       //implementing the above mentioned request
+        NSPredicate *pred = [NSPredicate predicateWithFormat:@"(checked == %@)", @1];           //set the predicate to get only those items which are selected with checkmarks
+        [req setPredicate:pred];                                                                 //implementing the above mentioned request
 
         
         NSArray *fetched = [context executeFetchRequest:req error:&error];
-        rtAmount = [fetched count];                                                                    //count the number of mached elements (selected)
+        rtAmount = [fetched count];                                                                //count the number of mached elements (selected)
    } else {
         
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"HasLaunchedOnce"];                 // OTHERWISE - if the app is launched for the first time
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"HasLaunchedOnce"];              // OTHERWISE - if the app is launched for the first time
         [[NSUserDefaults standardUserDefaults] synchronize];
         [createDB firstLoad];
        
@@ -78,22 +76,18 @@
     SelectionListViewController *controller = [[navigationController viewControllers] firstObject];
     controller.delegate = self;
    
-    if ([segue.identifier isEqualToString:@"MainAdd"]){                                           // if the main currency is to be changed  (otherwise - the "+" button is pressed)
+    if ([segue.identifier isEqualToString:@"MainAdd"]){                                        // if the main currency is to be changed  (otherwise - the "+" button is pressed)
         
         controller.selectedMainSegue = YES;
-	} else {
-    
-    controller.selectedCurrency = self.mainName.text;
-    
-    
+	}
   }
-}
+
 
 #pragma mark - UITableViewDataSource:
 
 - (NSInteger)tableView: (UITableView *)tableView numberOfRowsInSection: (NSInteger) section {
     
-    return rtAmount;                                                                               //number of selected elements in the second table
+    return rtAmount;                                                    //number of selected elements in the second table
 }
 
 
@@ -104,7 +98,7 @@
     NSManagedObjectContext *context = [appDelegate managedObjectContext];
     NSError *error;
     NSFetchRequest *req = [NSFetchRequest new];    
-    NSPredicate *pred = [NSPredicate predicateWithFormat:@"(checked == %@)", @1];                  //get only those elements wich are selected
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"(checked == %@)", @1];          //get only those elements wich are selected
     NSEntityDescription *entityDesc = [NSEntityDescription entityForName:@"CurrencyInfo" inManagedObjectContext:context];
     
     [req setEntity:entityDesc];
@@ -112,7 +106,7 @@
     
     NSArray *fetched = [context executeFetchRequest:req error:&error];
     CurrencyInfo *exemplair = fetched [indexPath.row];
-    RTTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier: SimpleIdentifier];  //fill the tableView with data of selected currencies
+    RTTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier: SimpleIdentifier];        //fill the tableView with data of selected currencies
 
     cell.nameLabel.text = exemplair.abbrev;
     cell.fullNameLabel.text = exemplair.fullName;
@@ -126,7 +120,7 @@
     NSArray *mainFetched = [context executeFetchRequest:mainReq error:&error];
     RateHistory *mainCurrency = [mainFetched lastObject];
     CurrencyCalculation * calculation = [CurrencyCalculation new];
-    createDB = [Starter new];
+    createDB = [[Starter alloc]initStarter];
     
     double resultRate = [ calculation convertNumber:self.howMuch.text
                                          OfCurrency:[mainCurrency
@@ -154,14 +148,11 @@
     [req setEntity:entityDesc];
     
     NSArray *fetched = [context executeFetchRequest:req error:&error];
-    indexMain = [NSNumber numberWithInt:indexTableRow];
-    unsigned index = indexTableRow;                                                //detecting the row of selected item to become the main currency
+    
+    unsigned index = indexTableRow;                                                                         //detecting the row of selected item to become the main currency
     
     CurrencyInfo *exemplair = fetched[index];
-    if ([exemplair.checked isEqualToNumber:@1]) {exemplair.checked = nil;
-        rtAmount -=1;
     
-    }
     self.mainName.text = exemplair.abbrev;                                                                  //output the changed data
     self.mainFullName.text = exemplair.fullName;
     self.mainImage.image = [UIImage imageNamed:exemplair.icon];
@@ -175,49 +166,20 @@
     rtAmount = amount;
 }
 
-- (void) backgroundRefresh:(void (^)(UIBackgroundFetchResult))completionHanler
-{
-    NSMutableDictionary *result = [NSMutableDictionary new];
-    ParsingSynchronous *newParse = [ParsingSynchronous new];
-    result = [newParse synchroniousConvert];                                                                 //retrieving the data by synchronous request
-    completionHanler(UIBackgroundFetchResultNewData);
-    WorkWithDB *medium = [WorkWithDB new];
-    RateHistory *exemplair2 = [medium the_same_func];                                                        //implementing the objects amount violation control
-    NSDate *now = [NSDate date];
-    NSDateFormatter *dateFormatter = [NSDateFormatter new];
-    [dateFormatter setDateFormat:@"dd-MM-yyyy"];
-    NSString *strMyDate= [dateFormatter stringFromDate:now];
-    NSString *lastSaveString = [dateFormatter stringFromDate:exemplair2.date];
-    
-    if([strMyDate isEqualToString:lastSaveString])                                                            //check whether there is already updates for the current date
-    {                                                                                                         //        ||
-                                  NSLog(@"IF used");                                                          //        \/
-       [RateHistory rewriteEntityObject:result :exemplair2];                                                  // if there is - rewrite the last Entity object
-                                  NSLog(@"rewritten object --->>> from background fetch");                    //        ||
-    }else {                                                                                                   //        \/
-       [RateHistory newEntityObject:result];                                                                  // otherwise - create new (add) Entity object
-                                  NSLog(@"new bject  --->>>  from background fetch");
-    }
-    [self.myTableView reloadData];
-}
 
-
-- (IBAction)endEditing:(id)sender                                                                              // hiding the keyboard
+- (IBAction)endEditing:(id)sender                                                                            // hiding the keyboard
 {
    [sender resignFirstResponder];
    [self.myTableView reloadData];
 }
 
 
-- (IBAction)refreshTableView:(id)sender                                                                       //downloading fresh data on exchange rate from yahoo and loading it to DB MANUALLY
+- (IBAction)refreshTableView:(id)sender                                                                 //downloading fresh data on exchange rate from yahoo and loading it to DB
 {
-    
-    WorkWithDB *dbSample = [WorkWithDB new];
-    [dbSample DBCheckWithBlock:^(NSString* success){
-        if([success isEqualToString:@"Yes!"])
-            [self.myTableView reloadData];
-    }];
-                                   NSLog(@"End parSing!!!");
+   
+    ParcingYahoo * megaParser = [ParcingYahoo new];
+    [megaParser refreshData];
+     NSLog(@"End parSing!!!");
 }
 
 

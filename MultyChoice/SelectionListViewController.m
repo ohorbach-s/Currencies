@@ -22,26 +22,26 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"wood-wallpaper.png"]];
     SimpleIdentifier = @"SimpleIdentifier";
-    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
+   
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - UITableViewDataSource:
 
 - (NSInteger)tableView: (UITableView *)tableView numberOfRowsInSection: (NSInteger) section{
     
-   UsedData *data = [[UsedData alloc]initData];
-    return [data.shortNames count];
+    Starter *start = [[Starter alloc]initStarter];
+    return [start.shortNames count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-   
-    
     tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"wood-wallpaper.png"]];
     RTTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier: SimpleIdentifier];
     RTAppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
@@ -75,6 +75,8 @@
             self.amount += 1;
         }
     }
+    NSLog(@"table amount = %d", self.amount);
+    
     return cell;
 }
 
@@ -102,31 +104,23 @@
         NSArray *fetched = [context executeFetchRequest:req error:&error];
         CurrencyInfo *exemplair = fetched[indexPath.row];
         
-       // if (![self.selectedCurrency isEqualToString:exemplair.abbrev]){
-        
         if (cell.accessoryType == UITableViewCellAccessoryNone) {
             
-           
-           if (![self.selectedCurrency isEqualToString:exemplair.abbrev]){
             cell.accessoryType = UITableViewCellAccessoryCheckmark;
             self.amount += 1;
             exemplair.checked = @1;
             NSError *error;
             [context save: &error];
-           }
             
         } else if (cell.accessoryType == UITableViewCellAccessoryCheckmark){
-           
-
+            
             cell.accessoryType = UITableViewCellAccessoryNone;
             self.amount -= 1;
             exemplair.checked = nil;
             
             NSError *error;
             [context save: &error];
-            
         }
-   // }
     
    NSLog(@"amount = %d", self.amount);
         

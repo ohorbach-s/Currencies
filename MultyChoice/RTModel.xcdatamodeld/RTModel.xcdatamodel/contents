@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="13F34" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="13E28" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="CurrencyInfo" representedClassName="CurrencyInfo" syncable="YES">
         <attribute name="abbrev" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="checked" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="fullName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="icon" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="toHistory" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="RateHistory" inverseName="currencies" inverseEntity="RateHistory" syncable="YES"/>
     </entity>
     <entity name="RateHistory" representedClassName="RateHistory" syncable="YES">
         <attribute name="aud" optional="YES" attributeType="String" syncable="YES"/>
@@ -18,9 +19,10 @@
         <attribute name="uah" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="usd" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="xau" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="currencies" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CurrencyInfo" inverseName="toHistory" inverseEntity="CurrencyInfo" syncable="YES"/>
     </entity>
     <elements>
-        <element name="CurrencyInfo" positionX="-603" positionY="27" width="128" height="105"/>
-        <element name="RateHistory" positionX="-371" positionY="27" width="128" height="210"/>
+        <element name="CurrencyInfo" positionX="-603" positionY="27" width="128" height="118"/>
+        <element name="RateHistory" positionX="-371" positionY="27" width="128" height="223"/>
     </elements>
 </model>

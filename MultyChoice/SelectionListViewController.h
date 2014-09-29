@@ -10,7 +10,7 @@
 #import "RTTableViewCell.h"
 #import "RTAppDelegate.h"
 #import "Starter.h"
-#import "UsedData.h"
+
 
 
 @protocol AddCurrencyDelegate <NSObject>
@@ -21,15 +21,12 @@
 
 @end
 
-
 @interface SelectionListViewController: UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 
 @property (nonatomic) BOOL selectedMainSegue;
 @property (nonatomic)unsigned int amount;
 @property (nonatomic, weak) id <AddCurrencyDelegate>delegate;
-@property (strong, nonatomic) NSString *selectedCurrency;
-
 
 - (IBAction)done:(UIBarButtonItem *)sender;
 
