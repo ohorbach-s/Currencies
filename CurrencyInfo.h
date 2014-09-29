@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import "RTAppDelegate.h"
+#import "UsedData.h"
 
 @class RateHistory;
 
@@ -17,6 +19,7 @@
 @property (nonatomic, retain) NSString * fullName;
 @property (nonatomic, retain) NSString * icon;
 @property (nonatomic, retain) NSNumber * checked;
-@property (nonatomic, retain) RateHistory *toHistory;
+
++(void) createMe;
 
 @end

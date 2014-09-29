@@ -10,113 +10,80 @@
 #import "RateHistory.h"
 #import "Starter.h"
 @implementation ParcingYahoo
-
--(id)init
-{
-    self = [super init];
-    if(self){
-        
-      _shortNames = @[@"UAH", @"USD", @"EUR", @"GBP", @"PLN", @"CAD", @"AUD", @"JPY", @"CNY", @"XAU"];
-    }
+- (void) convertwithBlock:(void (^)(NSMutableDictionary *)) block {                                       // implementing the asynchronous request for the manual update
     
-    return self;
-}
-
-
-- (void) convertUsdInto: (NSString*) currency withBlock:(void (^)(NSString *))block {
+    NSURL* url;
+    NSString* urlString = [NSString stringWithFormat:@"https://query.yahooapis.com/v1/public/yql?q=select%%20*%%20from%%20yahoo.finance.xchange%%20where%%20pair%%20in%%20(%%22USDUAH%%22%%2C%%22USDUSD%%22%%2C%%22USDEUR%%22%%2C%%22USDGBP%%22%%2C%%22USDPLN%%22%%2C%%22USDCAD%%22%%2C%%22USDAUD%%22%%2C%%22USDJPY%%22%%2C%%22USDCNY%%22%%2C%%22USDXAU%%22)&format=json&diagnostics=true&env=store%%3A%%2F%%2Fdatatables.org%%2Falltableswithkeys&callback="];
+    url = [NSURL URLWithString:urlString];
     
-    RTAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    NSManagedObjectContext *context = [appDelegate managedObjectContext];
-    NSError *error;
-    
-    for (int j = 0; j < [_shortNames count]; j++) {
-        NSURL* url;
-        NSString* urlString = [NSString stringWithFormat:@"https://query.yahooapis.com/v1/public/yql?q=select%%20*%%20from%%20yahoo.finance.xchange%%20where%%20pair%%20in%%20(%%22USD%@%%22)&format=json&diagnostics=true&env=store%%3A%%2F%%2Fdatatables.org%%2Falltableswithkeys&callback=", currency];
-        
-        url = [NSURL URLWithString:urlString];
-        NSURLRequest *request = [NSURLRequest requestWithURL:url];
-        [NSURLConnection sendAsynchronousRequest:request
-                                           queue:[NSOperationQueue mainQueue]
-                               completionHandler:^(NSURLResponse *response,
-                                                   NSData *data, NSError *connectionError)
-         {
-             
-             if (data.length > 0 && connectionError == nil)
-             {
-                 NSDictionary* rateDict = [[[[NSJSONSerialization JSONObjectWithData:data options:0 error:NULL]
-                                             objectForKey:@"query"] objectForKey:@"results"] objectForKey:@"rate"];
-                 block([rateDict objectForKey:@"Rate"]);
-             } else block (@"error");
-         }];
-        [context save:&error];
-    }
-}
-
--(void)refreshData
-{
-    RTAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    NSManagedObjectContext *context = [appDelegate managedObjectContext];
-    
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    [request setEntity: [NSEntityDescription entityForName: @"RateHistory"
-                                    inManagedObjectContext: context]];
-    NSError *error;
-    NSArray *fetched = [context executeFetchRequest:request
-                                              error:&error];
-    
-    RateHistory *exemplair = [fetched lastObject];
-    NSDate *now = [NSDate date];
-    
-    NSUInteger count = [context countForFetchRequest: request
-                                               error: &error];
-    if (count > 7){
-        [request setFetchLimit:1];
-        NSArray *fetched = [context executeFetchRequest:request
-                                                  error:&error];
-        RateHistory *rateToDelete = fetched[0];
-        [context deleteObject:rateToDelete];
-        [context save:&error];
-     } else {
-        
-        NSDateFormatter *dateFormatter = [NSDateFormatter new];
-        [dateFormatter setDateFormat:@"dd-MM-yyyy"];
-        NSString *strMyDate= [dateFormatter stringFromDate:now];
-        NSEntityDescription *entityDesc = [NSEntityDescription entityForName:@"RateHistory"
-                                                       inManagedObjectContext:context];
-        [request setEntity:entityDesc];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    [NSURLConnection sendAsynchronousRequest:request
+                                       queue:[NSOperationQueue mainQueue]
+                           completionHandler:^(NSURLResponse *response,
+                                               NSData *data, NSError *connectionError)
+     {
          
-        NSArray *fetched = [context executeFetchRequest:request
-                                                  error:&error];
-        exemplair = [fetched lastObject];
-        NSString *lastSaveString = [dateFormatter stringFromDate:exemplair.date];
-        
-        if([strMyDate isEqualToString:lastSaveString]){
-            
-    //requesting from yahoo and saving
-            for (int j = 0; j < [_shortNames count]; j++){
-              
-             [self convertUsdInto: [_shortNames objectAtIndex:j] withBlock:^(NSString *rate) {
-             [exemplair setValue:rate forKey:[[_shortNames objectAtIndex:j] lowercaseString]];// заповнюєм ентіті History джейсоном
+         if (data.length > 0 && connectionError == nil) {
+             NSArray* rateDict = [[[[NSJSONSerialization JSONObjectWithData:data options:0 error:NULL]
+                                    objectForKey:@"query"] objectForKey:@"results"] objectForKey:@"rate"];
+             
+             NSMutableDictionary *pairResult = [NSMutableDictionary new];
+             for (NSDictionary *tmp in rateDict) {
+                 NSString *newstrID = [tmp objectForKey:@"id"];
+                 NSString *strID = [newstrID substringFromIndex:3];
+                 NSString *newstrValue = [tmp objectForKey:@"Rate"];
+                 [pairResult setObject:newstrValue forKey:strID];
+                 NSLog(@"%@",[pairResult valueForKey:strID]);
+             }
+             NSLog(@"parsing ended");
+             block(pairResult);
+         } else  {
+//             if (![[NSUserDefaults standardUserDefaults] boolForKey:@"HasLaunchedOnce"])
+//             {
+//                 UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"No Internet connection"
+//                                                                   message:nil
+//                                                                  delegate:nil
+//                                                         cancelButtonTitle:@"exit app"
+//                                                         otherButtonTitles:nil];
+//                 [message show];
+//                 
+//             } else {
+             RTAppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+             NSManagedObjectContext *context = [appDelegate managedObjectContext];
              NSError *error;
-             [context save:&error];
-             }];
-           }
-        } else {
-          RateHistory *newResult = [NSEntityDescription insertNewObjectForEntityForName:@"RateHistory"
-                                                                 inManagedObjectContext:context];
-          newResult.date = now;
-            
-          for (int j = 0; j < [_shortNames count]; j++) {
-            [self convertUsdInto: [_shortNames objectAtIndex:j] withBlock:^(NSString *rate) {
-            [newResult setValue:rate forKey:[[_shortNames objectAtIndex:j] lowercaseString]];// заповнюєм ентіті History джейсоном
-            NSError *error;
-            [context save:&error];
-          }];
-        }
-           
-    }
-  }
-     NSLog(@"After parsing");
+             NSFetchRequest *req = [NSFetchRequest new];
+             NSEntityDescription *entityDesc = [NSEntityDescription entityForName:@"RateHistory" inManagedObjectContext:context];
+             [req setEntity:entityDesc];
+             NSArray *fetched = [context executeFetchRequest:req error:&error];
+             RateHistory *temp = [fetched lastObject];
+             NSDateFormatter *dateFormatter = [NSDateFormatter new];
+             [dateFormatter setDateFormat:@"dd-MM-yyyy hh:mm"];
+             NSString *strMyDate= [dateFormatter stringFromDate:temp.date];
+             
+             if (temp.date == nil)    {
+             
+                 UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"No Internet connection"
+                                                                   message:nil
+                                                                  delegate:nil
+                                                         cancelButtonTitle:@"Okay :C"
+                                                         otherButtonTitles:nil];
+                 [message show];
+             
+             }     else {    NSString *datestring = [NSString stringWithFormat:@"Data is valid for %@", strMyDate];
+             
+             UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"No Internet connection"
+                                                               message:datestring
+                                                              delegate:nil
+                                                     cancelButtonTitle:@"Okay"
+                                                     otherButtonTitles:nil];
+                 [message show];
+             
+             }
+             block(nil);
+             
+         }
+     }];
+    
 }
 
 @end

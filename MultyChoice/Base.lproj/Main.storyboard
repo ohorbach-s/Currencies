@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="d2b-VT-9B1">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="d2b-VT-9B1">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -75,6 +75,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Currencies" id="7yc-cA-5fi">
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="pKP-MM-6yd">
+                            <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="done:" destination="FF8-c8-gex" id="fhJ-pl-yjB"/>
                             </connections>
@@ -85,7 +86,7 @@
             </objects>
             <point key="canvasLocation" x="1690" y="123"/>
         </scene>
-        <!--View Controller-->
+        <!--View Controller - Exchange Rate-->
         <scene sceneID="K2R-Uc-LvS">
             <objects>
                 <viewController id="eNp-t3-4Kf" customClass="RTViewController" sceneMemberID="viewController">
@@ -193,15 +194,14 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="VBZ-In-NsZ">
+                    <navigationItem key="navigationItem" title="Exchange Rate" id="VBZ-In-NsZ">
                         <barButtonItem key="leftBarButtonItem" systemItem="refresh" id="bac-X1-hvm">
-                            <connections>
-                                <action selector="refreshTableView:" destination="eNp-t3-4Kf" id="zJa-rB-U6j"/>
-                            </connections>
+                            <color key="tintColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="KD3-5v-02m">
+                            <color key="tintColor" red="0.97254908084869385" green="0.019607843831181526" blue="0.10588236153125763" alpha="1" colorSpace="deviceRGB"/>
                             <connections>
-                                <segue destination="kMu-bA-5XV" kind="modal" identifier="Add" id="qAw-EX-EaI"/>
+                                <segue destination="kMu-bA-5XV" kind="modal" identifier="Add" id="ydm-wJ-v7c"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -263,6 +263,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="qAw-EX-EaI"/>
+        <segue reference="ydm-wJ-v7c"/>
     </inferredMetricsTieBreakers>
 </document>

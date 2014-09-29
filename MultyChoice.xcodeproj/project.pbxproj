@@ -37,10 +37,13 @@
 		8DE7497719BCA74200DD24CC /* UAH.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DE7496D19BCA74200DD24CC /* UAH.png */; };
 		8DE7497819BCA74200DD24CC /* USD.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DE7496E19BCA74200DD24CC /* USD.png */; };
 		8DE7497919BCA74200DD24CC /* XAU.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8DE7496F19BCA74200DD24CC /* XAU.jpg */; };
+		8E1A178419D31C0C002D21B2 /* wood-wallpaper.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E1A178319D31C0C002D21B2 /* wood-wallpaper.png */; };
 		8E37F89F19CC1A0C00446D56 /* Starter.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E37F89E19CC1A0C00446D56 /* Starter.m */; };
+		8E53CDFD19D70C570008F41F /* ParsingSynchronous.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E53CDFC19D70C570008F41F /* ParsingSynchronous.m */; };
+		8E80AA4D19D57A610014694E /* UsedData.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E80AA4C19D57A610014694E /* UsedData.m */; };
+		8E80AA5019D57CD00014694E /* WorkWithDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E80AA4F19D57CD00014694E /* WorkWithDB.m */; };
 		8E93BE8019CF208B00C3C294 /* CurrencyInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E93BE7F19CF208B00C3C294 /* CurrencyInfo.m */; };
 		8E93BE8319CF208B00C3C294 /* RateHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E93BE8219CF208B00C3C294 /* RateHistory.m */; };
-		F67AE53419D40AB00009D0E3 /* wood-wallpaper.png in Resources */ = {isa = PBXBuildFile; fileRef = F67AE53319D40AB00009D0E3 /* wood-wallpaper.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,13 +96,19 @@
 		8DE7496D19BCA74200DD24CC /* UAH.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UAH.png; sourceTree = "<group>"; };
 		8DE7496E19BCA74200DD24CC /* USD.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = USD.png; sourceTree = "<group>"; };
 		8DE7496F19BCA74200DD24CC /* XAU.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = XAU.jpg; sourceTree = "<group>"; };
+		8E1A178319D31C0C002D21B2 /* wood-wallpaper.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wood-wallpaper.png"; sourceTree = SOURCE_ROOT; };
 		8E37F89D19CC1A0C00446D56 /* Starter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Starter.h; sourceTree = "<group>"; };
 		8E37F89E19CC1A0C00446D56 /* Starter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Starter.m; sourceTree = "<group>"; };
+		8E53CDFB19D70C560008F41F /* ParsingSynchronous.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParsingSynchronous.h; sourceTree = "<group>"; };
+		8E53CDFC19D70C570008F41F /* ParsingSynchronous.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParsingSynchronous.m; sourceTree = "<group>"; };
+		8E80AA4B19D57A610014694E /* UsedData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UsedData.h; sourceTree = "<group>"; };
+		8E80AA4C19D57A610014694E /* UsedData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UsedData.m; sourceTree = "<group>"; };
+		8E80AA4E19D57CD00014694E /* WorkWithDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkWithDB.h; sourceTree = "<group>"; };
+		8E80AA4F19D57CD00014694E /* WorkWithDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkWithDB.m; sourceTree = "<group>"; };
 		8E93BE7E19CF208B00C3C294 /* CurrencyInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CurrencyInfo.h; path = ../CurrencyInfo.h; sourceTree = "<group>"; };
 		8E93BE7F19CF208B00C3C294 /* CurrencyInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CurrencyInfo.m; path = ../CurrencyInfo.m; sourceTree = "<group>"; };
 		8E93BE8119CF208B00C3C294 /* RateHistory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RateHistory.h; path = ../RateHistory.h; sourceTree = "<group>"; };
 		8E93BE8219CF208B00C3C294 /* RateHistory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RateHistory.m; path = ../RateHistory.m; sourceTree = "<group>"; };
-		F67AE53319D40AB00009D0E3 /* wood-wallpaper.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wood-wallpaper.png"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,13 +189,18 @@
 		7B9AAF9419B9C2C60087210E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				F67AE53319D40AB00009D0E3 /* wood-wallpaper.png */,
 				8E93BE8119CF208B00C3C294 /* RateHistory.h */,
 				8E93BE8219CF208B00C3C294 /* RateHistory.m */,
 				8E93BE7E19CF208B00C3C294 /* CurrencyInfo.h */,
 				8E93BE7F19CF208B00C3C294 /* CurrencyInfo.m */,
 				842EB32419C2F55A003BEE61 /* RTTableViewCell.h */,
 				842EB32519C2F55A003BEE61 /* RTTableViewCell.m */,
+				8E80AA4E19D57CD00014694E /* WorkWithDB.h */,
+				8E80AA4F19D57CD00014694E /* WorkWithDB.m */,
+				8E80AA4B19D57A610014694E /* UsedData.h */,
+				8E80AA4C19D57A610014694E /* UsedData.m */,
+				8E53CDFB19D70C560008F41F /* ParsingSynchronous.h */,
+				8E53CDFC19D70C570008F41F /* ParsingSynchronous.m */,
 				841061AA19C784B600B85831 /* ParcingYahoo.h */,
 				841061AB19C784B600B85831 /* ParcingYahoo.m */,
 				8408D59919CDC4A900435157 /* CurrencyCalculation.h */,
@@ -195,6 +209,7 @@
 				8DE7496719BCA74200DD24CC /* CAD.png */,
 				8DE7496819BCA74200DD24CC /* CNY.png */,
 				8DE7496919BCA74200DD24CC /* EUR.png */,
+				8E1A178319D31C0C002D21B2 /* wood-wallpaper.png */,
 				8DE7496A19BCA74200DD24CC /* GBP.png */,
 				8DE7496B19BCA74200DD24CC /* JPY.png */,
 				8DE7496C19BCA74200DD24CC /* PLN.png */,
@@ -312,6 +327,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8DE7497219BCA74200DD24CC /* CNY.png in Resources */,
+				8E1A178419D31C0C002D21B2 /* wood-wallpaper.png in Resources */,
 				8DE7497719BCA74200DD24CC /* UAH.png in Resources */,
 				8DE7497119BCA74200DD24CC /* CAD.png in Resources */,
 				8DE7497319BCA74200DD24CC /* EUR.png in Resources */,
@@ -322,7 +338,6 @@
 				8DE7497019BCA74200DD24CC /* AUD.png in Resources */,
 				8DE7497619BCA74200DD24CC /* PLN.png in Resources */,
 				7B9AAFA619B9C2C60087210E /* Images.xcassets in Resources */,
-				F67AE53419D40AB00009D0E3 /* wood-wallpaper.png in Resources */,
 				7B9AAF9819B9C2C60087210E /* InfoPlist.strings in Resources */,
 				7B9AAFA119B9C2C60087210E /* Main.storyboard in Resources */,
 			);
@@ -346,13 +361,16 @@
 				7B9AAF9E19B9C2C60087210E /* RTAppDelegate.m in Sources */,
 				8DE7496519BCA62400DD24CC /* SelectionListViewController.m in Sources */,
 				7B9AAFA419B9C2C60087210E /* RTViewController.m in Sources */,
+				8E80AA5019D57CD00014694E /* WorkWithDB.m in Sources */,
 				8E93BE8319CF208B00C3C294 /* RateHistory.m in Sources */,
+				8E80AA4D19D57A610014694E /* UsedData.m in Sources */,
 				8408D59B19CDC4A900435157 /* CurrencyCalculation.m in Sources */,
 				841621E919C9C2C2007E381F /* RTModel.xcdatamodeld in Sources */,
 				842EB32619C2F55A003BEE61 /* RTTableViewCell.m in Sources */,
 				8E93BE8019CF208B00C3C294 /* CurrencyInfo.m in Sources */,
 				841061AC19C784B600B85831 /* ParcingYahoo.m in Sources */,
 				8E37F89F19CC1A0C00446D56 /* Starter.m in Sources */,
+				8E53CDFD19D70C570008F41F /* ParsingSynchronous.m in Sources */,
 				7B9AAF9A19B9C2C60087210E /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

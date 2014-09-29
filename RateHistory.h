@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import "UsedData.h"
+#import "ParcingYahoo.h"
 
 @class CurrencyInfo;
 
@@ -24,7 +26,7 @@
 @property (nonatomic, retain) NSString * cny;
 @property (nonatomic, retain) NSString * jpy;
 @property (nonatomic, retain) NSString * eur;
-@property (nonatomic, retain) NSSet *currencies;
+
 @end
 
 @interface RateHistory (CoreDataGeneratedAccessors)
@@ -33,5 +35,12 @@
 - (void)removeCurrenciesObject:(CurrencyInfo *)value;
 - (void)addCurrencies:(NSSet *)values;
 - (void)removeCurrencies:(NSSet *)values;
+
+
+
+
++(void) rewriteEntityObject :(NSMutableDictionary*)dict :(RateHistory*)objectToRewrite;
++(void) newEntityObject :(NSMutableDictionary*)dict;
+
 
 @end

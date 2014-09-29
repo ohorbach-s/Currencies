@@ -8,15 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import "RateHistory.h"
-//#import "RTViewController.h"
 
 
-@interface ParcingYahoo : NSObject//<Parcing>
+@interface ParcingYahoo : NSObject
 
-@property (nonatomic, strong)NSArray *shortNames;
-@property (nonatomic, strong) RateHistory *freshResult;
 
-- (void) convertUsdInto: (NSString*) currency withBlock:(void (^)(NSString *))block;
--(void)refreshData;
+- (void) convertwithBlock:(void (^)(NSMutableDictionary *)) block;
 
 @end
