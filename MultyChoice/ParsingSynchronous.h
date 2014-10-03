@@ -6,10 +6,10 @@
 //  Copyright (c) 2014 Yuliia. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import "RateHistory.h"
-
-
-@interface ParsingSynchronous : NSObject
-- (NSMutableDictionary*) synchroniousConvert;
-@end
+//#import <Foundation/Foundation.h>
+//#import "RateHistory.h"
+//
+//
+//@interface ParsingSynchronous : NSObject
+//- (NSMutableDictionary*) synchroniousConvert;
+//@end

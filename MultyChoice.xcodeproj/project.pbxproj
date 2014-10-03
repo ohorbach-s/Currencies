@@ -12,9 +12,9 @@
 		7B9AAF9219B9C2C60087210E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B9AAF9119B9C2C60087210E /* UIKit.framework */; };
 		7B9AAF9819B9C2C60087210E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7B9AAF9619B9C2C60087210E /* InfoPlist.strings */; };
 		7B9AAF9A19B9C2C60087210E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B9AAF9919B9C2C60087210E /* main.m */; };
-		7B9AAF9E19B9C2C60087210E /* RTAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B9AAF9D19B9C2C60087210E /* RTAppDelegate.m */; };
+		7B9AAF9E19B9C2C60087210E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B9AAF9D19B9C2C60087210E /* AppDelegate.m */; };
 		7B9AAFA119B9C2C60087210E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B9AAF9F19B9C2C60087210E /* Main.storyboard */; };
-		7B9AAFA419B9C2C60087210E /* RTViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B9AAFA319B9C2C60087210E /* RTViewController.m */; };
+		7B9AAFA419B9C2C60087210E /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B9AAFA319B9C2C60087210E /* MainViewController.m */; };
 		7B9AAFA619B9C2C60087210E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B9AAFA519B9C2C60087210E /* Images.xcassets */; };
 		7B9AAFAD19B9C2C60087210E /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B9AAFAC19B9C2C60087210E /* XCTest.framework */; };
 		7B9AAFAE19B9C2C60087210E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B9AAF8D19B9C2C60087210E /* Foundation.framework */; };
@@ -22,10 +22,10 @@
 		7B9AAFB719B9C2C60087210E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7B9AAFB519B9C2C60087210E /* InfoPlist.strings */; };
 		7B9AAFB919B9C2C60087210E /* MultyChoiceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B9AAFB819B9C2C60087210E /* MultyChoiceTests.m */; };
 		8408D59B19CDC4A900435157 /* CurrencyCalculation.m in Sources */ = {isa = PBXBuildFile; fileRef = 8408D59A19CDC4A900435157 /* CurrencyCalculation.m */; };
-		841061AC19C784B600B85831 /* ParcingYahoo.m in Sources */ = {isa = PBXBuildFile; fileRef = 841061AB19C784B600B85831 /* ParcingYahoo.m */; };
+		841061AC19C784B600B85831 /* ParsingDataFromYahoo.m in Sources */ = {isa = PBXBuildFile; fileRef = 841061AB19C784B600B85831 /* ParsingDataFromYahoo.m */; };
 		841621E619C9C231007E381F /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 841621E519C9C231007E381F /* CoreData.framework */; };
 		841621E919C9C2C2007E381F /* RTModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 841621E719C9C2C2007E381F /* RTModel.xcdatamodeld */; };
-		842EB32619C2F55A003BEE61 /* RTTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 842EB32519C2F55A003BEE61 /* RTTableViewCell.m */; };
+		842EB32619C2F55A003BEE61 /* TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 842EB32519C2F55A003BEE61 /* TableViewCell.m */; };
 		8DE7496519BCA62400DD24CC /* SelectionListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE7496419BCA62400DD24CC /* SelectionListViewController.m */; };
 		8DE7497019BCA74200DD24CC /* AUD.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DE7496619BCA74200DD24CC /* AUD.png */; };
 		8DE7497119BCA74200DD24CC /* CAD.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DE7496719BCA74200DD24CC /* CAD.png */; };
@@ -38,12 +38,13 @@
 		8DE7497819BCA74200DD24CC /* USD.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DE7496E19BCA74200DD24CC /* USD.png */; };
 		8DE7497919BCA74200DD24CC /* XAU.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8DE7496F19BCA74200DD24CC /* XAU.jpg */; };
 		8E1A178419D31C0C002D21B2 /* wood-wallpaper.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E1A178319D31C0C002D21B2 /* wood-wallpaper.png */; };
-		8E37F89F19CC1A0C00446D56 /* Starter.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E37F89E19CC1A0C00446D56 /* Starter.m */; };
-		8E53CDFD19D70C570008F41F /* ParsingSynchronous.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E53CDFC19D70C570008F41F /* ParsingSynchronous.m */; };
+		8E33C4B119DD503D0037470C /* DataBaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E33C4B019DD503D0037470C /* DataBaseManager.m */; };
+		8E33C4C219DD8E3C0037470C /* RefreshBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E33C4C119DD8E3C0037470C /* RefreshBackground.m */; };
+		8E33C4C519DD9F620037470C /* ManualRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E33C4C419DD9F620037470C /* ManualRefresh.m */; };
 		8E80AA4D19D57A610014694E /* UsedData.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E80AA4C19D57A610014694E /* UsedData.m */; };
-		8E80AA5019D57CD00014694E /* WorkWithDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E80AA4F19D57CD00014694E /* WorkWithDB.m */; };
 		8E93BE8019CF208B00C3C294 /* CurrencyInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E93BE7F19CF208B00C3C294 /* CurrencyInfo.m */; };
 		8E93BE8319CF208B00C3C294 /* RateHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E93BE8219CF208B00C3C294 /* RateHistory.m */; };
+		8EB9DD6B19DEB6AE00F461B1 /* InputText.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EB9DD6A19DEB6AE00F461B1 /* InputText.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,11 +66,11 @@
 		7B9AAF9719B9C2C60087210E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7B9AAF9919B9C2C60087210E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		7B9AAF9B19B9C2C60087210E /* MultyChoice-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MultyChoice-Prefix.pch"; sourceTree = "<group>"; };
-		7B9AAF9C19B9C2C60087210E /* RTAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RTAppDelegate.h; sourceTree = "<group>"; };
-		7B9AAF9D19B9C2C60087210E /* RTAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RTAppDelegate.m; sourceTree = "<group>"; };
+		7B9AAF9C19B9C2C60087210E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = MultyChoice/AppDelegate.h; sourceTree = "<group>"; };
+		7B9AAF9D19B9C2C60087210E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = MultyChoice/AppDelegate.m; sourceTree = "<group>"; };
 		7B9AAFA019B9C2C60087210E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		7B9AAFA219B9C2C60087210E /* RTViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RTViewController.h; sourceTree = "<group>"; };
-		7B9AAFA319B9C2C60087210E /* RTViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RTViewController.m; sourceTree = "<group>"; };
+		7B9AAFA219B9C2C60087210E /* MainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		7B9AAFA319B9C2C60087210E /* MainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		7B9AAFA519B9C2C60087210E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		7B9AAFAB19B9C2C60087210E /* MultyChoiceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MultyChoiceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B9AAFAC19B9C2C60087210E /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -78,12 +79,12 @@
 		7B9AAFB819B9C2C60087210E /* MultyChoiceTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MultyChoiceTests.m; sourceTree = "<group>"; };
 		8408D59919CDC4A900435157 /* CurrencyCalculation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrencyCalculation.h; sourceTree = "<group>"; };
 		8408D59A19CDC4A900435157 /* CurrencyCalculation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurrencyCalculation.m; sourceTree = "<group>"; };
-		841061AA19C784B600B85831 /* ParcingYahoo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParcingYahoo.h; sourceTree = "<group>"; };
-		841061AB19C784B600B85831 /* ParcingYahoo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParcingYahoo.m; sourceTree = "<group>"; };
+		841061AA19C784B600B85831 /* ParsingDataFromYahoo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParsingDataFromYahoo.h; sourceTree = "<group>"; };
+		841061AB19C784B600B85831 /* ParsingDataFromYahoo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParsingDataFromYahoo.m; sourceTree = "<group>"; };
 		841621E519C9C231007E381F /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		841621E819C9C2C2007E381F /* RTModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = RTModel.xcdatamodel; sourceTree = "<group>"; };
-		842EB32419C2F55A003BEE61 /* RTTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTTableViewCell.h; sourceTree = "<group>"; };
-		842EB32519C2F55A003BEE61 /* RTTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTTableViewCell.m; sourceTree = "<group>"; };
+		842EB32419C2F55A003BEE61 /* TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewCell.h; sourceTree = "<group>"; };
+		842EB32519C2F55A003BEE61 /* TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewCell.m; sourceTree = "<group>"; };
 		8DE7496319BCA62400DD24CC /* SelectionListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectionListViewController.h; sourceTree = "<group>"; };
 		8DE7496419BCA62400DD24CC /* SelectionListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectionListViewController.m; sourceTree = "<group>"; };
 		8DE7496619BCA74200DD24CC /* AUD.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AUD.png; sourceTree = "<group>"; };
@@ -97,18 +98,20 @@
 		8DE7496E19BCA74200DD24CC /* USD.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = USD.png; sourceTree = "<group>"; };
 		8DE7496F19BCA74200DD24CC /* XAU.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = XAU.jpg; sourceTree = "<group>"; };
 		8E1A178319D31C0C002D21B2 /* wood-wallpaper.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wood-wallpaper.png"; sourceTree = SOURCE_ROOT; };
-		8E37F89D19CC1A0C00446D56 /* Starter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Starter.h; sourceTree = "<group>"; };
-		8E37F89E19CC1A0C00446D56 /* Starter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Starter.m; sourceTree = "<group>"; };
-		8E53CDFB19D70C560008F41F /* ParsingSynchronous.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParsingSynchronous.h; sourceTree = "<group>"; };
-		8E53CDFC19D70C570008F41F /* ParsingSynchronous.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParsingSynchronous.m; sourceTree = "<group>"; };
+		8E33C4AF19DD503D0037470C /* DataBaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataBaseManager.h; sourceTree = "<group>"; };
+		8E33C4B019DD503D0037470C /* DataBaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataBaseManager.m; sourceTree = "<group>"; };
+		8E33C4C019DD8E3C0037470C /* RefreshBackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefreshBackground.h; sourceTree = "<group>"; };
+		8E33C4C119DD8E3C0037470C /* RefreshBackground.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RefreshBackground.m; sourceTree = "<group>"; };
+		8E33C4C319DD9F620037470C /* ManualRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ManualRefresh.h; sourceTree = "<group>"; };
+		8E33C4C419DD9F620037470C /* ManualRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ManualRefresh.m; sourceTree = "<group>"; };
 		8E80AA4B19D57A610014694E /* UsedData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UsedData.h; sourceTree = "<group>"; };
 		8E80AA4C19D57A610014694E /* UsedData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UsedData.m; sourceTree = "<group>"; };
-		8E80AA4E19D57CD00014694E /* WorkWithDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkWithDB.h; sourceTree = "<group>"; };
-		8E80AA4F19D57CD00014694E /* WorkWithDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkWithDB.m; sourceTree = "<group>"; };
 		8E93BE7E19CF208B00C3C294 /* CurrencyInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CurrencyInfo.h; path = ../CurrencyInfo.h; sourceTree = "<group>"; };
 		8E93BE7F19CF208B00C3C294 /* CurrencyInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CurrencyInfo.m; path = ../CurrencyInfo.m; sourceTree = "<group>"; };
 		8E93BE8119CF208B00C3C294 /* RateHistory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RateHistory.h; path = ../RateHistory.h; sourceTree = "<group>"; };
 		8E93BE8219CF208B00C3C294 /* RateHistory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RateHistory.m; path = ../RateHistory.m; sourceTree = "<group>"; };
+		8EB9DD6919DEB6AE00F461B1 /* InputText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputText.h; sourceTree = "<group>"; };
+		8EB9DD6A19DEB6AE00F461B1 /* InputText.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputText.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,10 +142,12 @@
 		7B9AAF8119B9C2C60087210E = {
 			isa = PBXGroup;
 			children = (
-				7B9AAF9319B9C2C60087210E /* MultyChoice */,
+				8EB9DD6819DEB66D00F461B1 /*  InputText */,
+				7B9AAF9319B9C2C60087210E /* ExchangeRate */,
 				7B9AAFB219B9C2C60087210E /* MultyChoiceTests */,
 				7B9AAF8C19B9C2C60087210E /* Frameworks */,
 				7B9AAF8B19B9C2C60087210E /* Products */,
+				8E33C4BF19DD8E160037470C /* RefreshBachground */,
 			);
 			sourceTree = "<group>";
 		};
@@ -167,58 +172,33 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		7B9AAF9319B9C2C60087210E /* MultyChoice */ = {
+		7B9AAF9319B9C2C60087210E /* ExchangeRate */ = {
 			isa = PBXGroup;
 			children = (
 				7B9AAF9F19B9C2C60087210E /* Main.storyboard */,
-				841621E719C9C2C2007E381F /* RTModel.xcdatamodeld */,
-				7B9AAF9C19B9C2C60087210E /* RTAppDelegate.h */,
-				7B9AAF9D19B9C2C60087210E /* RTAppDelegate.m */,
-				8E37F89D19CC1A0C00446D56 /* Starter.h */,
-				8E37F89E19CC1A0C00446D56 /* Starter.m */,
-				7B9AAFA219B9C2C60087210E /* RTViewController.h */,
-				7B9AAFA319B9C2C60087210E /* RTViewController.m */,
-				8DE7496319BCA62400DD24CC /* SelectionListViewController.h */,
-				8DE7496419BCA62400DD24CC /* SelectionListViewController.m */,
-				7B9AAFA519B9C2C60087210E /* Images.xcassets */,
+				8E33C4BD19DD5C100037470C /* SelectionListViewController */,
+				8E33C4BB19DD5BBB0037470C /* MainViewController */,
+				8E33C4BC19DD5BDF0037470C /* AppDelegate */,
+				8E33C4BA19DD5ADB0037470C /* CurrencyCalculation */,
+				8E33C4B919DD5AA60037470C /* ParsingDataFromYahoo */,
+				8E33C4B819DD5A420037470C /* FlagsAndOneBeckGroundImages */,
+				8E33C4B719DD5A190037470C /* TableViewCell */,
+				8E33C4B619DD59DF0037470C /* UsedData */,
+				8E33C4B319DD50E40037470C /* DataBaseManager */,
+				8E33C4B219DD504C0037470C /* DataBaseFiles */,
 				7B9AAF9419B9C2C60087210E /* Supporting Files */,
 			);
+			name = ExchangeRate;
 			path = MultyChoice;
 			sourceTree = "<group>";
 		};
 		7B9AAF9419B9C2C60087210E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				8E93BE8119CF208B00C3C294 /* RateHistory.h */,
-				8E93BE8219CF208B00C3C294 /* RateHistory.m */,
-				8E93BE7E19CF208B00C3C294 /* CurrencyInfo.h */,
-				8E93BE7F19CF208B00C3C294 /* CurrencyInfo.m */,
-				842EB32419C2F55A003BEE61 /* RTTableViewCell.h */,
-				842EB32519C2F55A003BEE61 /* RTTableViewCell.m */,
-				8E80AA4E19D57CD00014694E /* WorkWithDB.h */,
-				8E80AA4F19D57CD00014694E /* WorkWithDB.m */,
-				8E80AA4B19D57A610014694E /* UsedData.h */,
-				8E80AA4C19D57A610014694E /* UsedData.m */,
-				8E53CDFB19D70C560008F41F /* ParsingSynchronous.h */,
-				8E53CDFC19D70C570008F41F /* ParsingSynchronous.m */,
-				841061AA19C784B600B85831 /* ParcingYahoo.h */,
-				841061AB19C784B600B85831 /* ParcingYahoo.m */,
-				8408D59919CDC4A900435157 /* CurrencyCalculation.h */,
-				8408D59A19CDC4A900435157 /* CurrencyCalculation.m */,
-				8DE7496619BCA74200DD24CC /* AUD.png */,
-				8DE7496719BCA74200DD24CC /* CAD.png */,
-				8DE7496819BCA74200DD24CC /* CNY.png */,
-				8DE7496919BCA74200DD24CC /* EUR.png */,
-				8E1A178319D31C0C002D21B2 /* wood-wallpaper.png */,
-				8DE7496A19BCA74200DD24CC /* GBP.png */,
-				8DE7496B19BCA74200DD24CC /* JPY.png */,
-				8DE7496C19BCA74200DD24CC /* PLN.png */,
-				8DE7496D19BCA74200DD24CC /* UAH.png */,
-				8DE7496E19BCA74200DD24CC /* USD.png */,
-				8DE7496F19BCA74200DD24CC /* XAU.jpg */,
 				7B9AAF9519B9C2C60087210E /* MultyChoice-Info.plist */,
 				7B9AAF9619B9C2C60087210E /* InfoPlist.strings */,
 				7B9AAF9919B9C2C60087210E /* main.m */,
+				8E33C4C619DD9F680037470C /* ManualRefresh */,
 				7B9AAF9B19B9C2C60087210E /* MultyChoice-Prefix.pch */,
 			);
 			name = "Supporting Files";
@@ -240,6 +220,137 @@
 				7B9AAFB519B9C2C60087210E /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		8E33C4B219DD504C0037470C /* DataBaseFiles */ = {
+			isa = PBXGroup;
+			children = (
+				841621E719C9C2C2007E381F /* RTModel.xcdatamodeld */,
+				8E93BE8119CF208B00C3C294 /* RateHistory.h */,
+				8E93BE8219CF208B00C3C294 /* RateHistory.m */,
+				8E93BE7E19CF208B00C3C294 /* CurrencyInfo.h */,
+				8E93BE7F19CF208B00C3C294 /* CurrencyInfo.m */,
+			);
+			name = DataBaseFiles;
+			sourceTree = "<group>";
+		};
+		8E33C4B319DD50E40037470C /* DataBaseManager */ = {
+			isa = PBXGroup;
+			children = (
+				8E33C4AF19DD503D0037470C /* DataBaseManager.h */,
+				8E33C4B019DD503D0037470C /* DataBaseManager.m */,
+			);
+			name = DataBaseManager;
+			sourceTree = "<group>";
+		};
+		8E33C4B619DD59DF0037470C /* UsedData */ = {
+			isa = PBXGroup;
+			children = (
+				8E80AA4B19D57A610014694E /* UsedData.h */,
+				8E80AA4C19D57A610014694E /* UsedData.m */,
+			);
+			name = UsedData;
+			sourceTree = "<group>";
+		};
+		8E33C4B719DD5A190037470C /* TableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				842EB32419C2F55A003BEE61 /* TableViewCell.h */,
+				842EB32519C2F55A003BEE61 /* TableViewCell.m */,
+			);
+			name = TableViewCell;
+			sourceTree = "<group>";
+		};
+		8E33C4B819DD5A420037470C /* FlagsAndOneBeckGroundImages */ = {
+			isa = PBXGroup;
+			children = (
+				7B9AAFA519B9C2C60087210E /* Images.xcassets */,
+				8DE7496619BCA74200DD24CC /* AUD.png */,
+				8DE7496719BCA74200DD24CC /* CAD.png */,
+				8DE7496819BCA74200DD24CC /* CNY.png */,
+				8DE7496919BCA74200DD24CC /* EUR.png */,
+				8E1A178319D31C0C002D21B2 /* wood-wallpaper.png */,
+				8DE7496A19BCA74200DD24CC /* GBP.png */,
+				8DE7496B19BCA74200DD24CC /* JPY.png */,
+				8DE7496C19BCA74200DD24CC /* PLN.png */,
+				8DE7496D19BCA74200DD24CC /* UAH.png */,
+				8DE7496E19BCA74200DD24CC /* USD.png */,
+				8DE7496F19BCA74200DD24CC /* XAU.jpg */,
+			);
+			name = FlagsAndOneBeckGroundImages;
+			sourceTree = "<group>";
+		};
+		8E33C4B919DD5AA60037470C /* ParsingDataFromYahoo */ = {
+			isa = PBXGroup;
+			children = (
+				841061AA19C784B600B85831 /* ParsingDataFromYahoo.h */,
+				841061AB19C784B600B85831 /* ParsingDataFromYahoo.m */,
+			);
+			name = ParsingDataFromYahoo;
+			sourceTree = "<group>";
+		};
+		8E33C4BA19DD5ADB0037470C /* CurrencyCalculation */ = {
+			isa = PBXGroup;
+			children = (
+				8408D59919CDC4A900435157 /* CurrencyCalculation.h */,
+				8408D59A19CDC4A900435157 /* CurrencyCalculation.m */,
+			);
+			name = CurrencyCalculation;
+			sourceTree = "<group>";
+		};
+		8E33C4BB19DD5BBB0037470C /* MainViewController */ = {
+			isa = PBXGroup;
+			children = (
+				7B9AAFA219B9C2C60087210E /* MainViewController.h */,
+				7B9AAFA319B9C2C60087210E /* MainViewController.m */,
+			);
+			name = MainViewController;
+			sourceTree = "<group>";
+		};
+		8E33C4BC19DD5BDF0037470C /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				7B9AAF9C19B9C2C60087210E /* AppDelegate.h */,
+				7B9AAF9D19B9C2C60087210E /* AppDelegate.m */,
+			);
+			name = AppDelegate;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		8E33C4BD19DD5C100037470C /* SelectionListViewController */ = {
+			isa = PBXGroup;
+			children = (
+				8DE7496319BCA62400DD24CC /* SelectionListViewController.h */,
+				8DE7496419BCA62400DD24CC /* SelectionListViewController.m */,
+			);
+			name = SelectionListViewController;
+			sourceTree = "<group>";
+		};
+		8E33C4BF19DD8E160037470C /* RefreshBachground */ = {
+			isa = PBXGroup;
+			children = (
+				8E33C4C019DD8E3C0037470C /* RefreshBackground.h */,
+				8E33C4C119DD8E3C0037470C /* RefreshBackground.m */,
+			);
+			name = RefreshBachground;
+			sourceTree = "<group>";
+		};
+		8E33C4C619DD9F680037470C /* ManualRefresh */ = {
+			isa = PBXGroup;
+			children = (
+				8E33C4C319DD9F620037470C /* ManualRefresh.h */,
+				8E33C4C419DD9F620037470C /* ManualRefresh.m */,
+			);
+			name = ManualRefresh;
+			sourceTree = "<group>";
+		};
+		8EB9DD6819DEB66D00F461B1 /*  InputText */ = {
+			isa = PBXGroup;
+			children = (
+				8EB9DD6919DEB6AE00F461B1 /* InputText.h */,
+				8EB9DD6A19DEB6AE00F461B1 /* InputText.m */,
+			);
+			name = " InputText";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -358,20 +469,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7B9AAF9E19B9C2C60087210E /* RTAppDelegate.m in Sources */,
+				8EB9DD6B19DEB6AE00F461B1 /* InputText.m in Sources */,
+				7B9AAF9E19B9C2C60087210E /* AppDelegate.m in Sources */,
 				8DE7496519BCA62400DD24CC /* SelectionListViewController.m in Sources */,
-				7B9AAFA419B9C2C60087210E /* RTViewController.m in Sources */,
-				8E80AA5019D57CD00014694E /* WorkWithDB.m in Sources */,
+				7B9AAFA419B9C2C60087210E /* MainViewController.m in Sources */,
 				8E93BE8319CF208B00C3C294 /* RateHistory.m in Sources */,
 				8E80AA4D19D57A610014694E /* UsedData.m in Sources */,
 				8408D59B19CDC4A900435157 /* CurrencyCalculation.m in Sources */,
 				841621E919C9C2C2007E381F /* RTModel.xcdatamodeld in Sources */,
-				842EB32619C2F55A003BEE61 /* RTTableViewCell.m in Sources */,
+				842EB32619C2F55A003BEE61 /* TableViewCell.m in Sources */,
 				8E93BE8019CF208B00C3C294 /* CurrencyInfo.m in Sources */,
-				841061AC19C784B600B85831 /* ParcingYahoo.m in Sources */,
-				8E37F89F19CC1A0C00446D56 /* Starter.m in Sources */,
-				8E53CDFD19D70C570008F41F /* ParsingSynchronous.m in Sources */,
+				841061AC19C784B600B85831 /* ParsingDataFromYahoo.m in Sources */,
+				8E33C4C219DD8E3C0037470C /* RefreshBackground.m in Sources */,
+				8E33C4C519DD9F620037470C /* ManualRefresh.m in Sources */,
 				7B9AAF9A19B9C2C60087210E /* main.m in Sources */,
+				8E33C4B119DD503D0037470C /* DataBaseManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -499,7 +611,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MultyChoice/MultyChoice-Prefix.pch";
 				INFOPLIST_FILE = "MultyChoice/MultyChoice-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = MultyChoice;
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -513,7 +625,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MultyChoice/MultyChoice-Prefix.pch";
 				INFOPLIST_FILE = "MultyChoice/MultyChoice-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = MultyChoice;
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -535,7 +647,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "MultyChoiceTests/MultyChoiceTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = MultyChoiceTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -553,7 +665,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MultyChoice/MultyChoice-Prefix.pch";
 				INFOPLIST_FILE = "MultyChoiceTests/MultyChoiceTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = MultyChoiceTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};

@@ -11,7 +11,7 @@
 @interface CurrencyCalculation : NSObject
 
 
--(double) convertNumber: (NSString *)amount OfCurrency: (NSString *)mainCurrency into: (NSString *)currency;
+-(double) convertNumber: (double)amount OfCurrency: (NSString *)mainCurrency into: (NSString *)currency;
 
 
 @end

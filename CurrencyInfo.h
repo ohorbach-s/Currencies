@@ -8,10 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
-#import "RTAppDelegate.h"
+#import "AppDelegate.h"
 #import "UsedData.h"
 
-@class RateHistory;
+
 
 @interface CurrencyInfo : NSManagedObject
 

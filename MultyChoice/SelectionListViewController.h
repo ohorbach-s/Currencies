@@ -7,29 +7,23 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "RTTableViewCell.h"
-#import "RTAppDelegate.h"
-#import "Starter.h"
+#import "TableViewCell.h"
+#import "AppDelegate.h"
 #import "UsedData.h"
-
+#import "CurrencyInfo.h"
+#import "DataBaseManager.h"
 
 @protocol AddCurrencyDelegate <NSObject>
-
-
-- (void) setSelectedCurrency: (unsigned int) amount;
-- (void) setMainCurrency: (unsigned int) indexTableRow;
-
+- (void)setMainCurrency:(unsigned int)indexTableRow;
 @end
 
+@interface SelectionListViewController
+    : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
-@interface SelectionListViewController: UIViewController <UITableViewDataSource, UITableViewDelegate>
-
-
-@property (nonatomic) BOOL selectedMainSegue;
-@property (nonatomic)unsigned int amount;
-@property (nonatomic, weak) id <AddCurrencyDelegate>delegate;
-@property (strong, nonatomic) NSString *selectedCurrency;
-
+@property(nonatomic) BOOL selectedMainSegue;
+@property(nonatomic) unsigned int amount;
+@property(nonatomic, weak) id<AddCurrencyDelegate> delegate;
+@property(strong, nonatomic) NSString *selectedCurrency;
 
 - (IBAction)done:(UIBarButtonItem *)sender;
 

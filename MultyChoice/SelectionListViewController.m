@@ -8,138 +8,105 @@
 
 #import "SelectionListViewController.h"
 
-
-
-@interface SelectionListViewController ()
-{
-    NSString *SimpleIdentifier;
+@interface SelectionListViewController () {
+  DataBaseManager *dataBaseManager;
+  UsedData *data;
 }
+
+@property(weak, nonatomic) IBOutlet UITableView *selectionTableView;
 
 @end
 
 @implementation SelectionListViewController
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    SimpleIdentifier = @"SimpleIdentifier";
-    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
+- (void)viewDidLoad {
+  [super viewDidLoad];
+  dataBaseManager = [DataBaseManager sharedManager];
+  self.navigationController.navigationBar.titleTextAttributes =
+      @{NSForegroundColorAttributeName : [UIColor whiteColor]};
+  _selectionTableView.backgroundColor = [UIColor
+      colorWithPatternImage:[UIImage imageNamed:@"wood-wallpaper.png"]];
+  data = [[UsedData alloc] initData];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
+- (void)didReceiveMemoryWarning {
+  [super didReceiveMemoryWarning];
 }
 
 #pragma mark - UITableViewDataSource:
 
-- (NSInteger)tableView: (UITableView *)tableView numberOfRowsInSection: (NSInteger) section{
-    
-   UsedData *data = [[UsedData alloc]initData];
-    return [data.shortNames count];
+- (NSInteger)tableView:(UITableView *)tableView
+    numberOfRowsInSection:(NSInteger)section {
+
+  return [data.shortNames count];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-   
-    
-    tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"wood-wallpaper.png"]];
-    RTTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier: SimpleIdentifier];
-    RTAppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
-    NSManagedObjectContext *context = [appDelegate managedObjectContext];
-    NSError *error;
-    NSFetchRequest *req = [NSFetchRequest new];
-    
-    NSEntityDescription *entityDesc =
-    [NSEntityDescription entityForName:@"CurrencyInfo"
-                inManagedObjectContext:context];
-    
-    [req setEntity:entityDesc];
-    
-    NSArray *fetched = [context executeFetchRequest:req error:&error];                                //loading the currencies data from DB
-    
-    unsigned index = indexPath.row;
-    
-    CurrencyInfo *exemplair = fetched[index];
-    cell.nameLabel.text = exemplair.abbrev;
-    cell.fullNameLabel.text = exemplair.fullName;
-    cell.flagImageView.image = [UIImage imageNamed:exemplair.icon];
-    cell.sumLabel.text = nil;
-    
-    [context save:&error];
-    
-    if(!self.selectedMainSegue){                                                                        //if the new currency is to be added to the target list
-        
-        if(exemplair.checked){                                                                       //if he element has been already selected - display its checkmark and increase amount
-            
-            cell.accessoryType = UITableViewCellAccessoryCheckmark;
-            self.amount += 1;
-        }
+- (UITableViewCell *)tableView:(UITableView *)tableView
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+
+  static NSString *SimpleIdentifier = @"SimpleIdentifier";
+  TableViewCell *cell =
+      [tableView dequeueReusableCellWithIdentifier:SimpleIdentifier];
+
+  CurrencyInfo *exemplair =
+      [dataBaseManager.fetchedArrayOfCurrencyInfo objectAtIndex:indexPath.row];
+  cell.nameLabel.text = exemplair.abbrev;
+  cell.fullNameLabel.text = exemplair.fullName;
+  cell.flagImageView.image = [UIImage imageNamed:exemplair.icon];
+  cell.sumLabel.text = nil;
+
+  if (!self.selectedMainSegue) { // if the new currency is to be added to the
+                                 // target list
+
+    if (exemplair.checked) { // if he element has been already selected -
+                             // display its checkmark and increase amount
+
+      cell.accessoryType = UITableViewCellAccessoryCheckmark;
     }
-    return cell;
+  }
+  return cell;
 }
-
 
 #pragma mark - UITableViewDelegate:
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    
-    if (self.selectedMainSegue){                                                                          //if the main currency is to be changed - invoke SETMainCurrency method
-        [[self delegate] setMainCurrency: indexPath.row];
-        [self dismissViewControllerAnimated:YES completion:nil];
-    } else {                                                                             //on contrary, if any new currency is to be added - accept new selections and put or put away checkmarks
-        RTAppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
-        NSManagedObjectContext *context = [appDelegate managedObjectContext];
-        NSFetchRequest *req = [NSFetchRequest new];
-        
-        NSEntityDescription *entityDesc =
-        [NSEntityDescription entityForName:@"CurrencyInfo"inManagedObjectContext:context];
-        
-        NSError *error;
-        [req setEntity:entityDesc];
-        
-        NSArray *fetched = [context executeFetchRequest:req error:&error];
-        CurrencyInfo *exemplair = fetched[indexPath.row];
-        
-       // if (![self.selectedCurrency isEqualToString:exemplair.abbrev]){
-        
-        if (cell.accessoryType == UITableViewCellAccessoryNone) {
-            
-           
-           if (![self.selectedCurrency isEqualToString:exemplair.abbrev]){
-            cell.accessoryType = UITableViewCellAccessoryCheckmark;
-            self.amount += 1;
-            exemplair.checked = @1;
-            NSError *error;
-            [context save: &error];
-           }
-            
-        } else if (cell.accessoryType == UITableViewCellAccessoryCheckmark){
-           
+- (void)tableView:(UITableView *)tableView
+    didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+  UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+  CABasicAnimation *shake = [CABasicAnimation animationWithKeyPath:@"position"];
+  [shake setDuration:0.1];
+  [shake setRepeatCount:3];
+  [shake setAutoreverses:YES];
 
-            cell.accessoryType = UITableViewCellAccessoryNone;
-            self.amount -= 1;
-            exemplair.checked = nil;
-            
-            NSError *error;
-            [context save: &error];
-            
-        }
-   // }
-    
-   NSLog(@"amount = %d", self.amount);
-        
-    }
-}
-
-
-- (IBAction)done:(UIBarButtonItem *)sender                                             //pass the amount of selected items towards the first view and dismiss this controller
-{
-    if(!self.selectedMainSegue)[[self delegate] setSelectedCurrency: self.amount];    
+  [shake setFromValue:[NSValue valueWithCGPoint:CGPointMake(cell.center.x - 5,
+                                                            cell.center.y)]];
+  [shake setToValue:[NSValue valueWithCGPoint:CGPointMake(cell.center.x + 5,
+                                                          cell.center.y)]];
+  [cell.layer addAnimation:shake forKey:@"position"];
+  if (self.selectedMainSegue) { // if the main currency is to be changed - invoke SETMainCurrency method
+    [[self delegate] setMainCurrency:indexPath.row];
     [self dismissViewControllerAnimated:YES completion:nil];
+  } else { // on contrary, if any new currency is to be added - accept new selections and put or put away checkmarks
+    CurrencyInfo *exemplair = [dataBaseManager.fetchedArrayOfCurrencyInfo
+        objectAtIndex:indexPath.row];
 
+    if (cell.accessoryType == UITableViewCellAccessoryNone) {
+      if (![self.selectedCurrency isEqualToString:exemplair.abbrev]) {
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        exemplair.checked = @1;
+      }
+    } else if (cell.accessoryType == UITableViewCellAccessoryCheckmark) {
+
+      cell.accessoryType = UITableViewCellAccessoryNone;
+      self.amount -= 1;
+      exemplair.checked = nil;
+    }
+  }
 }
 
+- (IBAction)done:(UIBarButtonItem *)sender // pass the amount of selected items
+                                           // towards the first view and dismiss
+                                           // this controller
+{
+  [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 @end
