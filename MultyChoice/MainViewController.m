@@ -33,7 +33,7 @@
                                      // the first time
     [[NSUserDefaults standardUserDefaults] synchronize];
     [DataBaseManager startWorkWithCurrencyRateAplication];
-  //  NSLog(@"DB is filled");
+
 
     self.mainName.text = @"UAH"; // output the changed data
     self.mainFullName.text = @"Ukrainian Hryvnia";
@@ -163,20 +163,6 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-  //    AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
-  //    NSManagedObjectContext *context = [appDelegate managedObjectContext];
-  //    NSError *error;
-  //
-  //    NSFetchRequest *mainReq = [NSFetchRequest new];
-  //    NSEntityDescription *mainRate = [NSEntityDescription
-  //    entityForName:@"RateHistory"
-  //                                                inManagedObjectContext:context];
-  //    [mainReq setEntity:mainRate];
-  //    NSArray *fetchArrayForRateHistory = [context executeFetchRequest:mainReq
-  //    error:&error];
-  //_fetchedRateHis = [NSMutableArray arrayWithArray:fetchArrayForRateHistory];
-  //    RateHistory *tempCurrencyRate = [fetchArrayForRateHistory firstObject];
-
   static NSString *SimpleIdentifier = @"SimpleIdentifier";
   CurrencyInfo *tempCurrency =
       [arrayOfSelectedCurrencies objectAtIndex:indexPath.row];
@@ -256,7 +242,6 @@
         [self.refreshControl endRefreshing];
       [self.myTableView reloadData];
   }];
-  //NSLog(@"End parSing!!!");
 }
 
 - (void)shakeAnimation:(UILabel *)label {
