@@ -13,5 +13,6 @@
 @property (nonatomic, assign)int dots;
 
 - (void)checkTyping;
+-(void)customButton;
 
 @end

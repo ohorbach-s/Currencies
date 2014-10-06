@@ -8,7 +8,7 @@
 
 #import "CurrencyInfo.h"
 #import "RateHistory.h"
-
+#import "MainViewController.h"
 @implementation CurrencyInfo
 
 @dynamic abbrev;
@@ -37,5 +37,21 @@
     [context save:&error];
   //  NSLog(@"currency info really created %@", newResult.abbrev);
   }
+    
+//    self.mainName.text = @"UAH";             // output the changed data
+//    self.mainFullName.text = @"Ukrainian Hryvnia";
+//    self.mainImage.image = [UIImage imageNamed:@"UAH.png"];
+
 }
+
++(void) initTheMainCurrency:(NSString*)mainName :(NSString*)fullName
+                           :(NSString*)image
+{
+    MainViewController *targetController;
+    targetController.mainName.text = mainName;
+    targetController.mainFullName.text = fullName;
+    targetController.mainImage.image = [UIImage imageNamed:image];
+}
+    
+
 @end

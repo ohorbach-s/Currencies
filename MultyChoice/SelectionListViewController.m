@@ -26,6 +26,18 @@
   _selectionTableView.backgroundColor = [UIColor
       colorWithPatternImage:[UIImage imageNamed:@"wood-wallpaper.png"]];
   data = [[UsedData alloc] initData];
+    
+    
+    CGFloat rotationAngleDegrees = -15;
+    CGFloat rotationAngleRadians = rotationAngleDegrees * (M_PI/180);
+    CGPoint offsetPositioning = CGPointMake(-20, -20);
+    
+    CATransform3D transform = CATransform3DIdentity;
+    transform = CATransform3DRotate(transform, rotationAngleRadians, 0.0, 0.0, 1.0);
+    transform = CATransform3DTranslate(transform, offsetPositioning.x, offsetPositioning.y, 0.0);
+    _initialTransformation = transform;
+     _shownIndexes = [NSMutableSet set];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -63,6 +75,19 @@
       cell.accessoryType = UITableViewCellAccessoryCheckmark;
     }
   }
+    
+    if (![self.shownIndexes containsObject:indexPath]) {
+        [self.shownIndexes addObject:indexPath];
+        
+        //UIView *card = [(CTCardCell* )cell mainView];
+        cell.layer.transform = self.initialTransformation;
+        cell.layer.opacity = 1.8;
+        [UIView animateWithDuration:0.7 animations:^{
+            cell.layer.transform = CATransform3DIdentity;
+            cell.layer.opacity = 1;
+        }];
+    }
+
   return cell;
 }
 
@@ -81,10 +106,10 @@
   [shake setToValue:[NSValue valueWithCGPoint:CGPointMake(cell.center.x + 5,
                                                           cell.center.y)]];
   [cell.layer addAnimation:shake forKey:@"position"];
-  if (self.selectedMainSegue) { // if the main currency is to be changed - invoke SETMainCurrency method
-    [[self delegate] setMainCurrency:indexPath.row];
+  if (self.selectedMainSegue) {
+    [[self delegate] setMainCurrency:(unsigned int)indexPath.row];
     [self dismissViewControllerAnimated:YES completion:nil];
-  } else { // on contrary, if any new currency is to be added - accept new selections and put or put away checkmarks
+  } else {
     CurrencyInfo *exemplair = [dataBaseManager.fetchedArrayOfCurrencyInfo
         objectAtIndex:indexPath.row];
 
@@ -102,9 +127,23 @@
   }
 }
 
-- (IBAction)done:(UIBarButtonItem *)sender // pass the amount of selected items
-                                           // towards the first view and dismiss
-                                           // this controller
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (![self.shownIndexes containsObject:indexPath]) {
+        [self.shownIndexes addObject:indexPath];
+        cell.layer.transform = self.initialTransformation;
+        cell.layer.opacity = 1.8;
+        [UIView animateWithDuration:0.7 animations:^{
+            cell.layer.transform = CATransform3DIdentity;
+            cell.layer.opacity = 1;
+        }];
+    }
+}
+
+
+
+
+- (IBAction)done:(UIBarButtonItem *)sender
 {
   [self dismissViewControllerAnimated:YES completion:nil];
 }

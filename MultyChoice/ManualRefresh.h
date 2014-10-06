@@ -11,5 +11,5 @@
 #import "RateHistory.h"
 
 @interface ManualRefresh : NSObject
-+ (void)refreshTableViewWithCompletionHandler:(void (^)(NSString* ))completionHandler;
++ (void)refreshTableViewWithCompletionHandler:(void (^)(BOOL ))completionHandler;
 @end

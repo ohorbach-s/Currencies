@@ -11,7 +11,7 @@
 @implementation ManualRefresh
 
 
-+ (void)refreshTableViewWithCompletionHandler:(void (^)(NSString* ))completionHandler                                                                          //downloading fresh data on exchange rate from yahoo and loading it to DB MANUALLY
++ (void)refreshTableViewWithCompletionHandler:(void (^)(BOOL ))completionHandler                                                                          //downloading fresh data on exchange rate from yahoo and loading it to DB MANUALLY
 {
     DataBaseManager *dataBaseManager = [DataBaseManager sharedManager];
     RateHistory *exemplair = [dataBaseManager.fetchedRateHistory firstObject];
@@ -22,7 +22,7 @@
              [RateHistory rewriteEntityObject :exemplair withAcceptedData:rateDict];
              }                                                //    otherwise, creting new Entity object
      NSLog(@"writing to DB ended");
-     completionHandler(@"Yes!");
+     completionHandler(YES);
      }];
     
 }

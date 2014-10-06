@@ -15,7 +15,7 @@
 {
     DataBaseManager *dataBaseManager = [DataBaseManager sharedManager];
     RateHistory *exemplair = [dataBaseManager.fetchedRateHistory firstObject];
-    NSMutableDictionary *result = [ParsingDataFromYahoo synchronousRequest];                                                                 //retrieving the data by synchronous request
+    NSMutableDictionary *result = [ParsingDataFromYahoo synchronousRequest];                                                                 //retrieving the                   data by synchronous request
     completionHanler(UIBackgroundFetchResultNewData);
                                                        //implementing the objects amount violation control
     if (result != nil)

@@ -115,7 +115,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="kMu-bA-5XV" kind="modal" identifier="MainAdd" id="5TP-Ue-Iyz"/>
+                                    <segue destination="kMu-bA-5XV" kind="modal" identifier="MainAdd" modalTransitionStyle="coverVertical" id="5TP-Ue-Iyz"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="USD.png" translatesAutoresizingMaskIntoConstraints="NO" id="PPE-Gq-z6M">
@@ -186,14 +186,14 @@
                     </view>
                     <navigationItem key="navigationItem" title="Exchange Rate" id="VBZ-In-NsZ">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="KD3-5v-02m">
-                            <color key="tintColor" red="0.97254908084869385" green="0.019607843831181526" blue="0.10588236153125763" alpha="1" colorSpace="deviceRGB"/>
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
-                                <segue destination="kMu-bA-5XV" kind="modal" identifier="Add" id="ydm-wJ-v7c"/>
+                                <segue destination="kMu-bA-5XV" kind="modal" identifier="Add" modalTransitionStyle="coverVertical" id="ydm-wJ-v7c"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="howMuch" destination="xU1-3c-Ge4" id="uv1-Mm-sdC"/>
+                        <outlet property="currencyAmount" destination="xU1-3c-Ge4" id="yGS-f1-mmr"/>
                         <outlet property="mainFullName" destination="ftT-d3-AVj" id="hGC-0U-mLW"/>
                         <outlet property="mainImage" destination="PPE-Gq-z6M" id="pwk-cf-d06"/>
                         <outlet property="mainName" destination="yid-L0-BIA" id="DFv-vd-H0e"/>
@@ -250,6 +250,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="ydm-wJ-v7c"/>
+        <segue reference="5TP-Ue-Iyz"/>
     </inferredMetricsTieBreakers>
 </document>

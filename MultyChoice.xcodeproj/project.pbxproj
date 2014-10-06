@@ -45,6 +45,7 @@
 		8E93BE8019CF208B00C3C294 /* CurrencyInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E93BE7F19CF208B00C3C294 /* CurrencyInfo.m */; };
 		8E93BE8319CF208B00C3C294 /* RateHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E93BE8219CF208B00C3C294 /* RateHistory.m */; };
 		8EB9DD6B19DEB6AE00F461B1 /* InputText.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EB9DD6A19DEB6AE00F461B1 /* InputText.m */; };
+		8EFEC7EF19E2AED500E4EEF9 /* AnimationFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EFEC7EE19E2AED500E4EEF9 /* AnimationFile.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -112,6 +113,8 @@
 		8E93BE8219CF208B00C3C294 /* RateHistory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RateHistory.m; path = ../RateHistory.m; sourceTree = "<group>"; };
 		8EB9DD6919DEB6AE00F461B1 /* InputText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputText.h; sourceTree = "<group>"; };
 		8EB9DD6A19DEB6AE00F461B1 /* InputText.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputText.m; sourceTree = "<group>"; };
+		8EFEC7ED19E2AED500E4EEF9 /* AnimationFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimationFile.h; sourceTree = "<group>"; };
+		8EFEC7EE19E2AED500E4EEF9 /* AnimationFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimationFile.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,7 +145,6 @@
 		7B9AAF8119B9C2C60087210E = {
 			isa = PBXGroup;
 			children = (
-				8EB9DD6819DEB66D00F461B1 /*  InputText */,
 				7B9AAF9319B9C2C60087210E /* ExchangeRate */,
 				7B9AAFB219B9C2C60087210E /* MultyChoiceTests */,
 				7B9AAF8C19B9C2C60087210E /* Frameworks */,
@@ -176,12 +178,12 @@
 			isa = PBXGroup;
 			children = (
 				7B9AAF9F19B9C2C60087210E /* Main.storyboard */,
+				8EB9DD6819DEB66D00F461B1 /*  InputText */,
 				8E33C4BD19DD5C100037470C /* SelectionListViewController */,
 				8E33C4BB19DD5BBB0037470C /* MainViewController */,
 				8E33C4BC19DD5BDF0037470C /* AppDelegate */,
 				8E33C4BA19DD5ADB0037470C /* CurrencyCalculation */,
 				8E33C4B919DD5AA60037470C /* ParsingDataFromYahoo */,
-				8E33C4B819DD5A420037470C /* FlagsAndOneBeckGroundImages */,
 				8E33C4B719DD5A190037470C /* TableViewCell */,
 				8E33C4B619DD59DF0037470C /* UsedData */,
 				8E33C4B319DD50E40037470C /* DataBaseManager */,
@@ -197,8 +199,9 @@
 			children = (
 				7B9AAF9519B9C2C60087210E /* MultyChoice-Info.plist */,
 				7B9AAF9619B9C2C60087210E /* InfoPlist.strings */,
+				8EFEC7ED19E2AED500E4EEF9 /* AnimationFile.h */,
+				8EFEC7EE19E2AED500E4EEF9 /* AnimationFile.m */,
 				7B9AAF9919B9C2C60087210E /* main.m */,
-				8E33C4C619DD9F680037470C /* ManualRefresh */,
 				7B9AAF9B19B9C2C60087210E /* MultyChoice-Prefix.pch */,
 			);
 			name = "Supporting Files";
@@ -225,6 +228,7 @@
 		8E33C4B219DD504C0037470C /* DataBaseFiles */ = {
 			isa = PBXGroup;
 			children = (
+				8E33C4B819DD5A420037470C /* FlagsAndOneBeckGroundImages */,
 				841621E719C9C2C2007E381F /* RTModel.xcdatamodeld */,
 				8E93BE8119CF208B00C3C294 /* RateHistory.h */,
 				8E93BE8219CF208B00C3C294 /* RateHistory.m */,
@@ -239,6 +243,7 @@
 			children = (
 				8E33C4AF19DD503D0037470C /* DataBaseManager.h */,
 				8E33C4B019DD503D0037470C /* DataBaseManager.m */,
+				8E33C4C619DD9F680037470C /* ManualRefresh */,
 			);
 			name = DataBaseManager;
 			sourceTree = "<group>";
@@ -351,6 +356,7 @@
 				8EB9DD6A19DEB6AE00F461B1 /* InputText.m */,
 			);
 			name = " InputText";
+			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -479,6 +485,7 @@
 				841621E919C9C2C2007E381F /* RTModel.xcdatamodeld in Sources */,
 				842EB32619C2F55A003BEE61 /* TableViewCell.m in Sources */,
 				8E93BE8019CF208B00C3C294 /* CurrencyInfo.m in Sources */,
+				8EFEC7EF19E2AED500E4EEF9 /* AnimationFile.m in Sources */,
 				841061AC19C784B600B85831 /* ParsingDataFromYahoo.m in Sources */,
 				8E33C4C219DD8E3C0037470C /* RefreshBackground.m in Sources */,
 				8E33C4C519DD9F620037470C /* ManualRefresh.m in Sources */,

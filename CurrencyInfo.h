@@ -10,6 +10,7 @@
 #import <CoreData/CoreData.h>
 #import "AppDelegate.h"
 #import "UsedData.h"
+@class MainViewController;
 
 
 
@@ -21,5 +22,7 @@
 @property (nonatomic, retain) NSNumber * checked;
 
 +(void) createMe;
++(void) initTheMainCurrency:(NSString*)mainName :(NSString*)fullName
+                           :(NSString*)image;
 
 @end
