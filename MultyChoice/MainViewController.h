@@ -29,7 +29,6 @@
 @property (nonatomic, strong)CurrencyInfo *mainSaved2;
 @property (assign, nonatomic) CATransform3D initialTransformation;
 @property (nonatomic, strong) NSMutableSet *shownIndexes;
-
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 
 - (void)refreshTheMainTableView;

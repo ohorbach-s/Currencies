@@ -11,9 +11,6 @@
 #import "DataBaseManager.h"
 
 @interface ParsingDataFromYahoo : NSObject
-
-
 + (void) asynchronousRequestWithcompletionHandler:(void (^)(NSMutableDictionary *)) completionHandler;
 + (NSMutableDictionary*) synchronousRequest;
-
 @end

@@ -18,12 +18,9 @@
     dispatch_once(&onceToken, ^{
         sharedDataBaseManager = [[DataBaseManager alloc] init];
     });
-    
     [sharedDataBaseManager extractDataBase];
-    
     return sharedDataBaseManager;
 }
-
 - (id)init {
     if (self = [super init]) {
         _fetchedArrayOfCurrencyInfo = [[NSMutableArray alloc] init];
@@ -31,14 +28,14 @@
     }
     return self;
 }
-
 - (void)extractDataBase {
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     NSManagedObjectContext *context = [appDelegate managedObjectContext];
     NSError *error;
     NSFetchRequest *req = [NSFetchRequest new];
+    NSString *currencyInfoEntityName = @"CurrencyInfo";
     NSEntityDescription *entityDesc =
-    [NSEntityDescription entityForName:@"CurrencyInfo"
+    [NSEntityDescription entityForName:currencyInfoEntityName
                 inManagedObjectContext:context];
     
     [req setEntity:entityDesc];
@@ -47,8 +44,9 @@
     _fetchedArrayOfCurrencyInfo =
     [NSMutableArray arrayWithArray:tempArrayForCurrencyInfo];
     NSFetchRequest *mainReq = [NSFetchRequest new];
+    NSString *rateHistoryEntityName = @"RateHistory";
     NSEntityDescription *mainRate =
-    [NSEntityDescription entityForName:@"RateHistory"
+    [NSEntityDescription entityForName:rateHistoryEntityName
                 inManagedObjectContext:context];
     [mainReq setEntity:mainRate];
     NSArray *fetchArrayForRateHistory =
@@ -56,15 +54,11 @@
     _fetchedRateHistory =
     [NSMutableArray arrayWithArray:fetchArrayForRateHistory];
 }
-
+// fill the DB when the app is launched for the first time
 + (void)startWorkWithCurrencyRateAplication {
-    // fill the DB when the app is launched for the first time
-    [CurrencyInfo createMe];                         // creating currency information entity
+    [CurrencyInfo firstCurrencyInfoInitialization];                         // creating currency information entity
     [ParsingDataFromYahoo
-     asynchronousRequestWithcompletionHandler:
-     ^(NSMutableDictionary *rateDict)            // implementing the asynchronous
-     // request to fill the rate entity
-     {
+     asynchronousRequestWithcompletionHandler: ^(NSMutableDictionary *rateDict) {           // implementing the asynchronous
          if (rateDict != nil) {
              [RateHistory
               newEntityObject:rateDict];         // filling the rate entity
@@ -74,11 +68,10 @@
                                      message:@"The app is launched for the first time "
                                      @"and Data source is empty"
                                      delegate:nil
-                                     cancelButtonTitle:@"OK"
+                                     cancelButtonTitle:NSLocalizedString(@"OK", nil)
                                      otherButtonTitles:nil];
              [message show];                         // displaynig the relevant alert
          }
      }];
 }
-
 @end

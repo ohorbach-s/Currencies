@@ -13,10 +13,8 @@
 @class RateHistory;
 
 @interface DataBaseManager : NSObject
-
 @property (nonatomic, strong) NSMutableArray *fetchedArrayOfCurrencyInfo;
 @property (nonatomic, strong) NSMutableArray *fetchedRateHistory;
-
 +(id)sharedManager;
 +(void) startWorkWithCurrencyRateAplication;
 @end

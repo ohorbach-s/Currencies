@@ -9,9 +9,5 @@
 #import <Foundation/Foundation.h>
 
 @interface CurrencyCalculation : NSObject
-
-
 -(double) convertNumber: (double)amount OfCurrency: (NSString *)mainCurrency into: (NSString *)currency;
-
-
 @end

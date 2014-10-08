@@ -23,52 +23,38 @@
 @dynamic cny;
 @dynamic jpy;
 @dynamic eur;
-
+// rewrite the last retrieved Entity object
 + (void)rewriteEntityObject:(RateHistory *)objectToRewrite
            withAcceptedData:(NSMutableDictionary *)
-           dict // rewrite the last retrieved Entity object
-{
-  AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-  NSManagedObjectContext *context = [appDelegate managedObjectContext];
-  UsedData *getData = [[UsedData alloc] initData];
-  for (int j = 0; j < [getData.shortNames count]; j++) {
-
-    [objectToRewrite
-        setValue:[dict valueForKey:[getData.shortNames objectAtIndex:j]]
-          forKey:[[getData.shortNames objectAtIndex:j] lowercaseString]];
-  }
-  NSDate *now = [NSDate date];
-  objectToRewrite.date = now;
-  NSError *error;
-  [context save:&error];
- /*NSLog(@"rewriten rate history object::: uah %@ , date ::: %@",
-        [objectToRewrite valueForKey:@"uah"],
-        [objectToRewrite valueForKey:@"date"]);*/
+dict {
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    NSManagedObjectContext *context = [appDelegate managedObjectContext];
+    UsedData *getData = [[UsedData alloc] initData];
+    for (int j = 0; j < [getData.shortNames count]; j++) {
+        [objectToRewrite
+         setValue:[dict valueForKey:[getData.shortNames objectAtIndex:j]]
+         forKey:[[getData.shortNames objectAtIndex:j] lowercaseString]];
+    }
+    NSDate *now = [NSDate date];
+    objectToRewrite.date = now;
+    NSError *error;
+    [context save:&error];
 }
-
-+ (void)newEntityObject:(NSMutableDictionary *)dict // add new Entity object
-{
-  AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-  NSManagedObjectContext *context = [appDelegate managedObjectContext];
-  UsedData *getData = [[UsedData alloc] initData];
-  RateHistory *newResult =
-      [NSEntityDescription insertNewObjectForEntityForName:@"RateHistory"
-                                    inManagedObjectContext:context];
-  for (int j = 0; j < [getData.shortNames count]; j++) {
-    [newResult setValue:[dict valueForKey:[getData.shortNames objectAtIndex:j]]
-                 forKey:[[getData.shortNames objectAtIndex:j] lowercaseString]];
-  }
-  NSDate *now = [NSDate date];
-  newResult.date = now;
-  NSError *error;
-  [context save:&error];
- /* NSLog(@"new added object:: uah %@  date::: %@",
-        [newResult valueForKey:@"uah"], [newResult valueForKey:@"date"]);*/
+// add new Entity object
++ (void)newEntityObject:(NSMutableDictionary *)dict {
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    NSManagedObjectContext *context = [appDelegate managedObjectContext];
+    UsedData *getData = [[UsedData alloc] initData];
+    RateHistory *newResult =
+    [NSEntityDescription insertNewObjectForEntityForName:@"RateHistory"
+                                  inManagedObjectContext:context];
+    for (int j = 0; j < [getData.shortNames count]; j++) {
+        [newResult setValue:[dict valueForKey:[getData.shortNames objectAtIndex:j]]
+                     forKey:[[getData.shortNames objectAtIndex:j] lowercaseString]];
+    }
+    NSDate *now = [NSDate date];
+    newResult.date = now;
+    NSError *error;
+    [context save:&error];
 }
-
-- (instancetype)init {
-  self = [super init];
-  return self;
-}
-
 @end

@@ -12,6 +12,5 @@
 
 
 @interface RefreshBackground : NSObject
-
 + (void) backgroundRefresh:(void (^)(UIBackgroundFetchResult))completionHanler;
 @end

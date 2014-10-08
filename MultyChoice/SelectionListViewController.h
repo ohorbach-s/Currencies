@@ -12,10 +12,11 @@
 #import "UsedData.h"
 #import "CurrencyInfo.h"
 #import "DataBaseManager.h"
+#import "AnimationFile.h"
 #import <QuartzCore/QuartzCore.h>
 
 @protocol AddCurrencyDelegate <NSObject>
-- (void)setMainCurrency:(unsigned int)indexTableRow;
+- (void)setMainCurrency:(CurrencyInfo*)SelectedMain;
 @end
 
 @interface SelectionListViewController

@@ -34,7 +34,6 @@
 - (void)removeCurrenciesObject:(CurrencyInfo *)value;
 - (void)addCurrencies:(NSSet *)values;
 - (void)removeCurrencies:(NSSet *)values;
-
 +(void) rewriteEntityObject :(RateHistory*)objectToRewrite withAcceptedData:(NSMutableDictionary*)dict;
 +(void) newEntityObject :(NSMutableDictionary*)dict;
 

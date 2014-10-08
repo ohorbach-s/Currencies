@@ -7,11 +7,13 @@
 //
 
 #import "InputText.h"
-
+@interface InputText () {
+    NSString* notificationName;
+}
+@end
 @implementation InputText
 
-- (id)initWithFrame:(CGRect)frame
-{
+- (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         _dots = 0;
@@ -19,13 +21,10 @@
     return self;
 }
 
-- (void)checkTyping
-{
-
+- (void)checkTyping {
     if ([self.text rangeOfString:@"."].location != NSNotFound) {
         _dots++;
-    }
-    else {
+    } else {
         _dots = 0;
     }
     if ([self.text hasSuffix:@"."] && _dots >= 2) {
@@ -42,7 +41,7 @@
     if (self.text.length > 9) {
         self.text = [self.text substringToIndex:[self.text length] - 1];
     }
- }
+}
 
 -(void)customButton {
     UIToolbar* numberToolbar =
@@ -65,21 +64,19 @@
                            nil];
     [numberToolbar sizeToFit];
     self.inputAccessoryView = numberToolbar;
-
+    
 }
-
-- (void)cancelNumberPad
-{
+- (void)cancelNumberPad {
+    notificationName = @"ReloadTableDataNotification";
     self.text = @"1";
     self.dots = 0;
     [self resignFirstResponder];
-    //[self.myTableView reloadData];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadTableDataNotification"
+    [[NSNotificationCenter defaultCenter] postNotificationName:notificationName
                                                         object:nil];
 }
 
-- (void)doneWithNumberPad
-{
+- (void)doneWithNumberPad {
+    notificationName = @"ReloadTableDataNotification";
     if ([self.text hasSuffix:@"."]) {
         self.text = [self.text substringToIndex:[self.text length] - 1];
     }
@@ -88,7 +85,7 @@
     }
     self.dots = 0;
     [self resignFirstResponder];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadTableDataNotification"
+    [[NSNotificationCenter defaultCenter] postNotificationName:notificationName
                                                         object:nil];
 }
 

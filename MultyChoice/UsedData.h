@@ -12,6 +12,5 @@
 @property(nonatomic, strong) NSArray *shortNames;
 @property(nonatomic, strong) NSArray *fullNames;
 @property(nonatomic, strong) NSArray *flags;
-
 -(id)initData;
 @end

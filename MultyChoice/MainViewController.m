@@ -1,58 +1,47 @@
-//
-//  RTViewController.m
-//  MultyChoice
-//
-//  Created by Andriy on 9/5/14.
-//  Copyright (c) 2014 ___FULLUSERNAME___. All rights reserved.
-//
-
 #import "MainViewController.h"
 #import <QuartzCore/QuartzCore.h>
 #import "SelectionListViewController.h"
 @interface MainViewController () {
     unsigned int amountOfSelectedCurrencies;
-    //double quantity;
     int dots;
-    NSMutableArray* arrayOfSelectedCurrencies;
-    DataBaseManager* dataBaseManager;
-    
-    
+    NSMutableArray *arrayOfSelectedCurrencies;
+    DataBaseManager *dataBaseManager;
+    CurrencyInfo *mainCurrencySaved;
 }
-
 @end
 
 @implementation MainViewController
-
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
-    
+    NSString *appLauchKey = @"HasLaunchedOnce";
+    NSString *mainCurrencyKey = @"mainCurrency";
+    NSString *backgroundImage = @"wood-wallpaper.png";
+    NSString *notificationName = @"ReloadTableDataNotification";
     if (![[NSUserDefaults standardUserDefaults]
-          boolForKey:@"HasLaunchedOnce"]) {
-        [[NSUserDefaults standardUserDefaults]
-         setBool:YES
-         forKey:@"HasLaunchedOnce"];
+          boolForKey:appLauchKey]) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:appLauchKey];
         [[NSUserDefaults standardUserDefaults] synchronize];
         [DataBaseManager startWorkWithCurrencyRateAplication];
-        [CurrencyInfo  initTheMainCurrency:@"UAH" : @"Ukrainian Hryvnia":@"UAH.png"];
+        [CurrencyInfo  setTheMainCurrency:@"UAH" : @"Ukrainian Hryvnia":@"UAH.png" :self];
     }
     arrayOfSelectedCurrencies = [[NSMutableArray alloc] init];
     dataBaseManager = [DataBaseManager sharedManager];
-    NSInteger indexMain =
-    [[NSUserDefaults standardUserDefaults] integerForKey:@"mainCurrency"];
-    CurrencyInfo* mainCurrencySaved = [dataBaseManager.fetchedArrayOfCurrencyInfo
-                                       objectAtIndex:indexMain];                   // getting saved main currency from array
-    [CurrencyInfo  initTheMainCurrency:mainCurrencySaved.abbrev : mainCurrencySaved.fullName:mainCurrencySaved.icon];
+    NSString* abbrevMain =
+    [[NSUserDefaults standardUserDefaults] valueForKey:mainCurrencyKey];
+    for (CurrencyInfo* temp in dataBaseManager.fetchedArrayOfCurrencyInfo){
+        if ([temp.abbrev isEqualToString:abbrevMain]){
+            [CurrencyInfo  setTheMainCurrency:temp.abbrev :temp.fullName
+                                                :temp.icon :self];  }
+    }
     self.view.backgroundColor = [UIColor
-                                 colorWithPatternImage:[UIImage imageNamed:@"wood-wallpaper.png"]];
+                                 colorWithPatternImage:[UIImage imageNamed:backgroundImage]];
     _myTableView.backgroundColor = [UIColor clearColor];
     self.navigationController.navigationBar.titleTextAttributes =
     @{ NSForegroundColorAttributeName : [UIColor whiteColor] };
-    self.currencyAmount.text = @"1";                         // the initial amount of currency-to-convert
+    self.currencyAmount.text = @"1";
     
     self.refreshControl = [[UIRefreshControl alloc] init];
-    [self.refreshControl addTarget:self
-                            action:@selector(refreshTheMainTableView)
+    [self.refreshControl addTarget:self action:@selector(refreshTheMainTableView)
                   forControlEvents:UIControlEventValueChanged];
     [self.myTableView addSubview:self.refreshControl];               // Initialize the refresh control.
     self.currencyAmount.delegate = self;
@@ -64,20 +53,17 @@
     _shownIndexes = [NSMutableSet set];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(reloadTable:)
-                                                 name:@"ReloadTableDataNotification"
+                                                 name:notificationName
                                                object:nil];
 }
-
 - (void)reloadTable:(NSNotification *)notif {
     [self.myTableView reloadData];
 }
-
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
     [_currencyAmount customButton];
 }
-
-- (void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated {
+    [AnimationFile animateTableViewAppearance:self.myTableView];
     [arrayOfSelectedCurrencies removeAllObjects];
     for (CurrencyInfo* inf in dataBaseManager.fetchedArrayOfCurrencyInfo) {
         if (inf.checked) {
@@ -86,46 +72,40 @@
     }
     [self.myTableView reloadData];
 }
-
 - (void)didReceiveMemoryWarning {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [super didReceiveMemoryWarning];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue*)segue sender:(id)sender {
+    NSString *segueIdentifier = @"MainAdd";
     UINavigationController* navigationController = segue.destinationViewController;
     SelectionListViewController* controller =
     [[navigationController viewControllers] firstObject];
     controller.delegate = self;
-    if ([segue.identifier isEqualToString:@"MainAdd"]) {
+    if ([segue.identifier isEqualToString:segueIdentifier]) {
         controller.selectedMainSegue = YES;
     } else {
         controller.selectedCurrency = self.mainName.text;
     }
 }
 
-#pragma mark - UITableViewDataSource:
-
 - (NSInteger)tableView:(UITableView*)tableView
  numberOfRowsInSection:(NSInteger)section {
-    // number of selected elements in the second table
     return [arrayOfSelectedCurrencies count];
 }
-
 - (UITableViewCell*)tableView:(UITableView*)tableView
         cellForRowAtIndexPath:(NSIndexPath*)indexPath {
-    
-    static NSString* SimpleIdentifier = @"SimpleIdentifier";
+    NSString *cellIdentifier = @"SimpleIdentifier";
     CurrencyInfo* tempCurrency =
     [arrayOfSelectedCurrencies objectAtIndex:indexPath.row];
-    TableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:SimpleIdentifier];
+    TableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     cell.nameLabel.text = tempCurrency.abbrev;
     cell.fullNameLabel.text = tempCurrency.fullName;
     cell.flagImageView.image = [UIImage imageNamed:tempCurrency.icon];
     RateHistory* tempCurrencyRate =
     [dataBaseManager.fetchedRateHistory firstObject];
     CurrencyCalculation* calculation = [CurrencyCalculation new];
-    
     double resultRate = [calculation
                          convertNumber:[_currencyAmount.text doubleValue]
                          OfCurrency:[tempCurrencyRate
@@ -136,16 +116,23 @@
     cell.sumLabel.text = [NSString stringWithFormat:@"%.2f", resultRate];
     return cell;
 }
-
-#pragma mark - AddCurrencyDelegate:
 // change the currency to be converted into the target ones
-- (void)setMainCurrency:(unsigned int)indexTableRow {
+- (void)setMainCurrency:(CurrencyInfo*)SelectedMain {
     if (_mainSaved) {
         _mainSaved2 = _mainSaved;
+    } else {
+        for (CurrencyInfo* temp in dataBaseManager.fetchedArrayOfCurrencyInfo) {
+            if ([temp.abbrev isEqualToString:@"UAH"]){
+                temp.checked = @1;
+                _mainSaved2 = temp;
+            }else {
+                if ([temp.abbrev isEqualToString:_mainName.text]){
+                    temp.checked = @1;
+                }
+            }
+        }
     }
-    
-    CurrencyInfo* exemplair =
-    [dataBaseManager.fetchedArrayOfCurrencyInfo objectAtIndex:indexTableRow];
+    CurrencyInfo* exemplair = SelectedMain;
     for (CurrencyInfo* temp in dataBaseManager.fetchedArrayOfCurrencyInfo) {
         if (temp.abbrev == _mainSaved2.abbrev) {
             if (temp.checked != [NSNumber numberWithInt:1]) {
@@ -153,57 +140,44 @@
                 [arrayOfSelectedCurrencies addObject:temp];
             }
         }
-        if (temp.abbrev == exemplair.abbrev) {
-            temp.checked = nil;
+    }
+    [CurrencyInfo setTheMainCurrency:exemplair.abbrev :exemplair.fullName
+                                       :exemplair.icon :self];
+    _mainSaved = exemplair;
+    for (CurrencyInfo* temp in dataBaseManager.fetchedArrayOfCurrencyInfo) {
+        if (temp.abbrev == _mainSaved.abbrev) {
+            if (temp.abbrev == exemplair.abbrev) {
+                temp.checked = nil;
+                [arrayOfSelectedCurrencies removeObject:temp];
+            }
         }
     }
-    [CurrencyInfo initTheMainCurrency:exemplair.abbrev :exemplair.fullName :exemplair.icon];
-    _mainSaved = exemplair;
-    UILabel* label = self.mainName;
-    [AnimationFile shakeAnimation:label];
-    [[NSUserDefaults standardUserDefaults] setInteger:indexTableRow
-                                               forKey:@"mainCurrency"];
+    NSString *mainCurrencyKey = @"mainCurrency";
+    [[NSUserDefaults standardUserDefaults] setValue:exemplair.abbrev
+                                             forKey:mainCurrencyKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
+    [self.view addSubview:self.mainImage];                                       //add animation for main currency
+    [AnimationFile addFallAnimationForLayer:self.mainImage.layer];
+    [self.view addSubview:self.mainFullName];
+    [AnimationFile addFallAnimationForLayer:self.mainFullName.layer];
 }
-
 - (void)refreshTheMainTableView {
     [ManualRefresh refreshTableViewWithCompletionHandler:^(BOOL success) {
-        if (success)
+        if (success){
             [self.refreshControl endRefreshing];
+        }
         [self.myTableView reloadData];
     }];
-    [UIView transitionWithView: self.myTableView
-                      duration: 0.35f
-                       options: UIViewAnimationOptionTransitionCrossDissolve
-                    animations: ^(void) {
-         [self.myTableView reloadData];
-     }
-                    completion: ^(BOOL isFinished){
-     }];
-    
 }
-
-- (void)tableView:(UITableView *)tableView willDisplayCell
-                 :(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (![self.shownIndexes containsObject:indexPath]) {
-        [self.shownIndexes addObject:indexPath];
-        cell.layer.transform = self.initialTransformation;
-        [AnimationFile cellAnimation:cell];
-    }
-}
-
 - (void)tableView:(UITableView*)tableView
 commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
 forRowAtIndexPath:(NSIndexPath*)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        CurrencyInfo *exemplair =
-        [arrayOfSelectedCurrencies objectAtIndex:indexPath.row];
+        CurrencyInfo *exemplair = [arrayOfSelectedCurrencies objectAtIndex:indexPath.row];
         exemplair.checked = nil;
         [arrayOfSelectedCurrencies removeObjectAtIndex:indexPath.row];
         [tableView deleteRowsAtIndexPaths:@[indexPath]
                          withRowAnimation:UITableViewRowAnimationBottom];
     }
 }
-
-
 @end

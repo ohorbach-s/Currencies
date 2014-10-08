@@ -21,8 +21,8 @@
 @property (nonatomic, retain) NSString * icon;
 @property (nonatomic, retain) NSNumber * checked;
 
-+(void) createMe;
-+(void) initTheMainCurrency:(NSString*)mainName :(NSString*)fullName
-                           :(NSString*)image;
++(void) firstCurrencyInfoInitialization;
++(void) setTheMainCurrency:(NSString*)mainName :(NSString*)fullName
+                           :(NSString*)image :(MainViewController*) controller;
 
 @end
