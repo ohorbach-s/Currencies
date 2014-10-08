@@ -8,10 +8,12 @@
 
 #import "SelectionListViewController.h"
 
+extern NSString *backgroundImage;
+extern NSString *cellIdentifier;
+
 @interface SelectionListViewController () {
     DataBaseManager *dataBaseManager;
     UsedData *data;
-    NSString *backgroundImage;
 }
 @property(weak, nonatomic) IBOutlet UITableView *selectionTableView;
 @end
@@ -19,11 +21,10 @@
 @implementation SelectionListViewController
 - (void)viewDidLoad {
     [super viewDidLoad];
-    backgroundImage = @"wood-wallpaper.png";
     dataBaseManager = [DataBaseManager sharedManager];
     self.navigationController.navigationBar.titleTextAttributes =
     @{NSForegroundColorAttributeName : [UIColor whiteColor]};
-    _selectionTableView.backgroundColor = [UIColor
+    self.selectionTableView.backgroundColor = [UIColor
                                            colorWithPatternImage:[UIImage imageNamed:backgroundImage]];
     data = [[UsedData alloc] initData];
     
@@ -49,9 +50,8 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *SimpleIdentifier = @"SimpleIdentifier";
     TableViewCell *cell =
-    [tableView dequeueReusableCellWithIdentifier:SimpleIdentifier];
+    [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     CurrencyInfo *exemplair =
     [dataBaseManager.fetchedArrayOfCurrencyInfo objectAtIndex:indexPath.row];
     cell.nameLabel.text = exemplair.abbrev;
@@ -88,10 +88,9 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     } else {
         
         if (cell.accessoryType == UITableViewCellAccessoryNone) {
-            if (![self.selectedCurrency isEqualToString:exemplair.abbrev]) {
                 cell.accessoryType = UITableViewCellAccessoryCheckmark;
-                exemplair.checked = @1;
-            }
+                exemplair.checked = @(YES);
+            
         } else if (cell.accessoryType == UITableViewCellAccessoryCheckmark) {
             cell.accessoryType = UITableViewCellAccessoryNone;
             self.amount -= 1;

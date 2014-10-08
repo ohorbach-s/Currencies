@@ -11,7 +11,7 @@
 #import "UsedData.h"
 #import "ParsingDataFromYahoo.h"
 
-@class CurrencyInfo;
+
 @interface RateHistory : NSManagedObject
 
 @property (nonatomic, retain) NSDate * date;
@@ -30,10 +30,7 @@
 
 @interface RateHistory (CoreDataGeneratedAccessors)
 
-- (void)addCurrenciesObject:(CurrencyInfo *)value;
-- (void)removeCurrenciesObject:(CurrencyInfo *)value;
-- (void)addCurrencies:(NSSet *)values;
-- (void)removeCurrencies:(NSSet *)values;
+
 +(void) rewriteEntityObject :(RateHistory*)objectToRewrite withAcceptedData:(NSMutableDictionary*)dict;
 +(void) newEntityObject :(NSMutableDictionary*)dict;
 

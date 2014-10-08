@@ -7,9 +7,10 @@
 //
 
 #import "InputText.h"
-@interface InputText () {
-    NSString* notificationName;
-}
+
+
+
+@interface InputText ()
 @end
 @implementation InputText
 
@@ -67,16 +68,13 @@
     
 }
 - (void)cancelNumberPad {
-    notificationName = @"ReloadTableDataNotification";
     self.text = @"1";
     self.dots = 0;
     [self resignFirstResponder];
-    [[NSNotificationCenter defaultCenter] postNotificationName:notificationName
-                                                        object:nil];
+    [self.reloadDelegate reloadTable];
 }
 
 - (void)doneWithNumberPad {
-    notificationName = @"ReloadTableDataNotification";
     if ([self.text hasSuffix:@"."]) {
         self.text = [self.text substringToIndex:[self.text length] - 1];
     }
@@ -85,8 +83,7 @@
     }
     self.dots = 0;
     [self resignFirstResponder];
-    [[NSNotificationCenter defaultCenter] postNotificationName:notificationName
-                                                        object:nil];
+    [self.reloadDelegate reloadTable];
 }
 
 

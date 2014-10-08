@@ -18,7 +18,7 @@
 #import "InputText.h"
 #import "AnimationFile.h"
 
-@interface MainViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, AddCurrencyDelegate>
+@interface MainViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, AddCurrencyDelegate,ReloadTableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *myTableView;
 @property (weak, nonatomic) IBOutlet UILabel *mainName;

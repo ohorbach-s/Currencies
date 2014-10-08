@@ -8,7 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol ReloadTableViewDelegate <NSObject>
+
+- (void)reloadTable;
+
+@end
+
 @interface InputText : UITextField
+
+@property (nonatomic,weak)id<ReloadTableViewDelegate>reloadDelegate;
 
 @property (nonatomic, assign)int dots;
 

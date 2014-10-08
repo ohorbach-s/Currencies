@@ -18,13 +18,15 @@
     dispatch_once(&onceToken, ^{
         sharedDataBaseManager = [[DataBaseManager alloc] init];
     });
-    [sharedDataBaseManager extractDataBase];
+    
     return sharedDataBaseManager;
 }
 - (id)init {
+    
     if (self = [super init]) {
         _fetchedArrayOfCurrencyInfo = [[NSMutableArray alloc] init];
         _fetchedRateHistory = [[NSMutableArray alloc] init];
+        [self extractDataBase];
     }
     return self;
 }
@@ -74,4 +76,22 @@
          }
      }];
 }
+
+-(void)rememberAboutMainCurrency: (NSString *) mainCurrencyAbbreviation withKey: (NSString *) key {
+    [[NSUserDefaults standardUserDefaults] setValue:mainCurrencyAbbreviation
+                                             forKey:key];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+-(BOOL)checkApplicationLaunch: (NSString *) key {
+    return [[NSUserDefaults standardUserDefaults] boolForKey:key];
+}
+
+-(void)rememberAboutApplicationLaunchWithKey:(NSString *) key {
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:key];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+-(NSString *) recallAboutMainCurrencyUsingKey: (NSString*) key {
+    return [[NSUserDefaults standardUserDefaults] valueForKey:key];
+ }
 @end

@@ -10,10 +10,6 @@
 #import <CoreData/CoreData.h>
 #import "AppDelegate.h"
 #import "UsedData.h"
-@class MainViewController;
-
-
-
 @interface CurrencyInfo : NSManagedObject
 
 @property (nonatomic, retain) NSString * abbrev;
@@ -22,7 +18,6 @@
 @property (nonatomic, retain) NSNumber * checked;
 
 +(void) firstCurrencyInfoInitialization;
-+(void) setTheMainCurrency:(NSString*)mainName :(NSString*)fullName
-                           :(NSString*)image :(MainViewController*) controller;
+
 
 @end

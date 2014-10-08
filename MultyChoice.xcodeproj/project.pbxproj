@@ -113,8 +113,8 @@
 		8E93BE8219CF208B00C3C294 /* RateHistory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RateHistory.m; path = ../RateHistory.m; sourceTree = "<group>"; };
 		8EB9DD6919DEB6AE00F461B1 /* InputText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputText.h; sourceTree = "<group>"; };
 		8EB9DD6A19DEB6AE00F461B1 /* InputText.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputText.m; sourceTree = "<group>"; };
-		8EFEC7ED19E2AED500E4EEF9 /* AnimationFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimationFile.h; sourceTree = "<group>"; };
-		8EFEC7EE19E2AED500E4EEF9 /* AnimationFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimationFile.m; sourceTree = "<group>"; };
+		8EFEC7ED19E2AED500E4EEF9 /* AnimationFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AnimationFile.h; path = MultyChoice/AnimationFile.h; sourceTree = "<group>"; };
+		8EFEC7EE19E2AED500E4EEF9 /* AnimationFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AnimationFile.m; path = MultyChoice/AnimationFile.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,7 +149,6 @@
 				7B9AAFB219B9C2C60087210E /* MultyChoiceTests */,
 				7B9AAF8C19B9C2C60087210E /* Frameworks */,
 				7B9AAF8B19B9C2C60087210E /* Products */,
-				8E33C4BF19DD8E160037470C /* RefreshBachground */,
 			);
 			sourceTree = "<group>";
 		};
@@ -177,17 +176,10 @@
 		7B9AAF9319B9C2C60087210E /* ExchangeRate */ = {
 			isa = PBXGroup;
 			children = (
-				7B9AAF9F19B9C2C60087210E /* Main.storyboard */,
-				8EB9DD6819DEB66D00F461B1 /*  InputText */,
-				8E33C4BD19DD5C100037470C /* SelectionListViewController */,
-				8E33C4BB19DD5BBB0037470C /* MainViewController */,
+				8E9BCC1B19E56F210025453A /* Model */,
+				8E9BCC1D19E56F340025453A /* Controller */,
+				8E9BCC1C19E56F280025453A /* View */,
 				8E33C4BC19DD5BDF0037470C /* AppDelegate */,
-				8E33C4BA19DD5ADB0037470C /* CurrencyCalculation */,
-				8E33C4B919DD5AA60037470C /* ParsingDataFromYahoo */,
-				8E33C4B719DD5A190037470C /* TableViewCell */,
-				8E33C4B619DD59DF0037470C /* UsedData */,
-				8E33C4B319DD50E40037470C /* DataBaseManager */,
-				8E33C4B219DD504C0037470C /* DataBaseFiles */,
 				7B9AAF9419B9C2C60087210E /* Supporting Files */,
 			);
 			name = ExchangeRate;
@@ -199,8 +191,6 @@
 			children = (
 				7B9AAF9519B9C2C60087210E /* MultyChoice-Info.plist */,
 				7B9AAF9619B9C2C60087210E /* InfoPlist.strings */,
-				8EFEC7ED19E2AED500E4EEF9 /* AnimationFile.h */,
-				8EFEC7EE19E2AED500E4EEF9 /* AnimationFile.m */,
 				7B9AAF9919B9C2C60087210E /* main.m */,
 				7B9AAF9B19B9C2C60087210E /* MultyChoice-Prefix.pch */,
 			);
@@ -236,6 +226,7 @@
 				8E93BE7F19CF208B00C3C294 /* CurrencyInfo.m */,
 			);
 			name = DataBaseFiles;
+			path = MultyChoice;
 			sourceTree = "<group>";
 		};
 		8E33C4B319DD50E40037470C /* DataBaseManager */ = {
@@ -243,9 +234,9 @@
 			children = (
 				8E33C4AF19DD503D0037470C /* DataBaseManager.h */,
 				8E33C4B019DD503D0037470C /* DataBaseManager.m */,
-				8E33C4C619DD9F680037470C /* ManualRefresh */,
 			);
 			name = DataBaseManager;
+			path = MultyChoice;
 			sourceTree = "<group>";
 		};
 		8E33C4B619DD59DF0037470C /* UsedData */ = {
@@ -255,6 +246,7 @@
 				8E80AA4C19D57A610014694E /* UsedData.m */,
 			);
 			name = UsedData;
+			path = MultyChoice;
 			sourceTree = "<group>";
 		};
 		8E33C4B719DD5A190037470C /* TableViewCell */ = {
@@ -264,6 +256,7 @@
 				842EB32519C2F55A003BEE61 /* TableViewCell.m */,
 			);
 			name = TableViewCell;
+			path = MultyChoice;
 			sourceTree = "<group>";
 		};
 		8E33C4B819DD5A420037470C /* FlagsAndOneBeckGroundImages */ = {
@@ -288,10 +281,11 @@
 		8E33C4B919DD5AA60037470C /* ParsingDataFromYahoo */ = {
 			isa = PBXGroup;
 			children = (
-				841061AA19C784B600B85831 /* ParsingDataFromYahoo.h */,
 				841061AB19C784B600B85831 /* ParsingDataFromYahoo.m */,
+				841061AA19C784B600B85831 /* ParsingDataFromYahoo.h */,
 			);
 			name = ParsingDataFromYahoo;
+			path = MultyChoice;
 			sourceTree = "<group>";
 		};
 		8E33C4BA19DD5ADB0037470C /* CurrencyCalculation */ = {
@@ -301,6 +295,7 @@
 				8408D59A19CDC4A900435157 /* CurrencyCalculation.m */,
 			);
 			name = CurrencyCalculation;
+			path = MultyChoice;
 			sourceTree = "<group>";
 		};
 		8E33C4BB19DD5BBB0037470C /* MainViewController */ = {
@@ -310,6 +305,7 @@
 				7B9AAFA319B9C2C60087210E /* MainViewController.m */,
 			);
 			name = MainViewController;
+			path = MultyChoice;
 			sourceTree = "<group>";
 		};
 		8E33C4BC19DD5BDF0037470C /* AppDelegate */ = {
@@ -329,6 +325,7 @@
 				8DE7496419BCA62400DD24CC /* SelectionListViewController.m */,
 			);
 			name = SelectionListViewController;
+			path = MultyChoice;
 			sourceTree = "<group>";
 		};
 		8E33C4BF19DD8E160037470C /* RefreshBachground */ = {
@@ -347,6 +344,45 @@
 				8E33C4C419DD9F620037470C /* ManualRefresh.m */,
 			);
 			name = ManualRefresh;
+			path = MultyChoice;
+			sourceTree = "<group>";
+		};
+		8E9BCC1B19E56F210025453A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8E33C4B219DD504C0037470C /* DataBaseFiles */,
+				8E33C4B619DD59DF0037470C /* UsedData */,
+			);
+			name = Model;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		8E9BCC1C19E56F280025453A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7B9AAF9F19B9C2C60087210E /* Main.storyboard */,
+				8EB9DD6819DEB66D00F461B1 /*  InputText */,
+				8E33C4B719DD5A190037470C /* TableViewCell */,
+				8EFEC7ED19E2AED500E4EEF9 /* AnimationFile.h */,
+				8EFEC7EE19E2AED500E4EEF9 /* AnimationFile.m */,
+			);
+			name = View;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		8E9BCC1D19E56F340025453A /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				8E33C4BA19DD5ADB0037470C /* CurrencyCalculation */,
+				8E33C4B919DD5AA60037470C /* ParsingDataFromYahoo */,
+				8E33C4B319DD50E40037470C /* DataBaseManager */,
+				8E33C4C619DD9F680037470C /* ManualRefresh */,
+				8E33C4BF19DD8E160037470C /* RefreshBachground */,
+				8E33C4BD19DD5C100037470C /* SelectionListViewController */,
+				8E33C4BB19DD5BBB0037470C /* MainViewController */,
+			);
+			name = Controller;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		8EB9DD6819DEB66D00F461B1 /*  InputText */ = {
@@ -356,7 +392,6 @@
 				8EB9DD6A19DEB6AE00F461B1 /* InputText.m */,
 			);
 			name = " InputText";
-			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -527,6 +562,7 @@
 				7B9AAFA019B9C2C60087210E /* Base */,
 			);
 			name = Main.storyboard;
+			path = MultyChoice;
 			sourceTree = "<group>";
 		};
 		7B9AAFB519B9C2C60087210E /* InfoPlist.strings */ = {

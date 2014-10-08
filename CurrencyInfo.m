@@ -7,8 +7,6 @@
 //
 
 #import "CurrencyInfo.h"
-#import "RateHistory.h"
-#import "MainViewController.h"
 @implementation CurrencyInfo
 
 @dynamic abbrev;
@@ -28,15 +26,9 @@
         newResult.fullName = [getData.fullNames objectAtIndex:j];
         newResult.icon = [getData.flags objectAtIndex:j];
         newResult.checked = 0;
-        
         NSError *error;
         [context save:&error];
     }
 }
-+(void) setTheMainCurrency:(NSString*)mainName :(NSString*)fullName
-                             :(NSString*)image :(MainViewController*)controller {
-    controller.mainName.text = mainName;
-    controller.mainFullName.text = fullName;
-    controller.mainImage.image = [UIImage imageNamed:image];
-}
+
 @end

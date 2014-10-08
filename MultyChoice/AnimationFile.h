@@ -12,8 +12,8 @@
 
 @property (assign, nonatomic) CATransform3D initialTransformation;
 @property (nonatomic, strong) NSMutableSet *shownIndexes;
-+ (void)shakeAnimation:(UITableViewCell*)cell;
++(void)shakeAnimation:(UITableViewCell*)cell;
 +(void) cellAnimation :(UITableViewCell *)cell;
-+ (void)addFallAnimationForLayer:(CALayer *)layer;
++(void)addFallAnimationForLayer:(CALayer *)layer;
 +(void)animateTableViewAppearance:(UITableView*)tableView;
 @end
