@@ -25,7 +25,7 @@ static NSString *addSegueIdentifier = @"Add";
 - (void)viewDidLoad {
     [super viewDidLoad];
     dataBaseManager = [DataBaseManager sharedManager];
-    if (![dataBaseManager checkApplicationLaunch:appLauchKey]) {
+    if ([dataBaseManager checkApplicationLaunch:appLauchKey]) {
         [dataBaseManager rememberAboutApplicationLaunchWithKey:appLauchKey];
         [DataBaseManager startWorkWithCurrencyRateAplication];
         CurrencyInfo * tempCur = [dataBaseManager.fetchedArrayOfCurrencyInfo firstObject];
