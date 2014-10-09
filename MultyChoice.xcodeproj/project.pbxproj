@@ -99,6 +99,7 @@
 		8DE7496E19BCA74200DD24CC /* USD.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = USD.png; sourceTree = "<group>"; };
 		8DE7496F19BCA74200DD24CC /* XAU.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = XAU.jpg; sourceTree = "<group>"; };
 		8E1A178319D31C0C002D21B2 /* wood-wallpaper.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wood-wallpaper.png"; sourceTree = SOURCE_ROOT; };
+		8E2D40CC19E6799100371A92 /* ReloadProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReloadProtocol.h; sourceTree = "<group>"; };
 		8E33C4AF19DD503D0037470C /* DataBaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataBaseManager.h; sourceTree = "<group>"; };
 		8E33C4B019DD503D0037470C /* DataBaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataBaseManager.m; sourceTree = "<group>"; };
 		8E33C4C019DD8E3C0037470C /* RefreshBackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefreshBackground.h; sourceTree = "<group>"; };
@@ -191,6 +192,7 @@
 			children = (
 				7B9AAF9519B9C2C60087210E /* MultyChoice-Info.plist */,
 				7B9AAF9619B9C2C60087210E /* InfoPlist.strings */,
+				8E2D40CC19E6799100371A92 /* ReloadProtocol.h */,
 				7B9AAF9919B9C2C60087210E /* main.m */,
 				7B9AAF9B19B9C2C60087210E /* MultyChoice-Prefix.pch */,
 			);

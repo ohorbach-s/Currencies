@@ -71,7 +71,7 @@
     self.text = @"1";
     self.dots = 0;
     [self resignFirstResponder];
-    [self.reloadDelegate reloadTable];
+    [self reloadFromInput];
 }
 
 - (void)doneWithNumberPad {
@@ -83,10 +83,12 @@
     }
     self.dots = 0;
     [self resignFirstResponder];
-    [self.reloadDelegate reloadTable];
+    [self reloadFromInput];
 }
 
-
+-(void)reloadFromInput {
+ [self.reloadDelegate reloadTable];
+}
 
 
 @end

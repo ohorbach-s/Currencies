@@ -16,8 +16,9 @@
     static DataBaseManager *sharedDataBaseManager = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        sharedDataBaseManager = [[DataBaseManager alloc] init];
-    });
+       sharedDataBaseManager = [[DataBaseManager alloc] init];
+        
+     });
     
     return sharedDataBaseManager;
 }
@@ -57,14 +58,20 @@
     [NSMutableArray arrayWithArray:fetchArrayForRateHistory];
 }
 // fill the DB when the app is launched for the first time
-+ (void)startWorkWithCurrencyRateAplication {
++(void)startWorkWithCurrencyRateAplication {
     [CurrencyInfo firstCurrencyInfoInitialization];                         // creating currency information entity
-    [ParsingDataFromYahoo
-     asynchronousRequestWithcompletionHandler: ^(NSMutableDictionary *rateDict) {           // implementing the asynchronous
-         if (rateDict != nil) {
-             [RateHistory
-              newEntityObject:rateDict];         // filling the rate entity
-         } else {                                     // in case there is no internet connection available =D
+//
+    NSMutableDictionary *result = [ParsingDataFromYahoo synchronousRequest];
+    if (result != nil) {
+        [RateHistory newEntityObject:result];
+
+    
+    //[ParsingDataFromYahoo
+//     asynchronousRequestWithcompletionHandler: ^(NSMutableDictionary *rateDict) {           // implementing the asynchronous
+//         if (rateDict != nil) {
+//             [RateHistory newEntityObject:rateDict];
+//                                                        // filling the rate entity
+         } else {                                       // in case there is no internet connection available =D
              UIAlertView *message = [[UIAlertView alloc]
                                      initWithTitle:@"No Internet connection"
                                      message:@"The app is launched for the first time "
@@ -74,7 +81,7 @@
                                      otherButtonTitles:nil];
              [message show];                         // displaynig the relevant alert
          }
-     }];
+//     }];
 }
 
 -(void)rememberAboutMainCurrency: (NSString *) mainCurrencyAbbreviation withKey: (NSString *) key {
@@ -83,11 +90,13 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
--(BOOL)checkApplicationLaunch: (NSString *) key {
-    return [[NSUserDefaults standardUserDefaults] boolForKey:key];
+
++(BOOL)checkApplicationLaunch: (NSString *) key {
+    BOOL rezult = [[NSUserDefaults standardUserDefaults] boolForKey:key];
+    return rezult;
 }
 
--(void)rememberAboutApplicationLaunchWithKey:(NSString *) key {
++(void)rememberAboutApplicationLaunchWithKey:(NSString *) key {
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:key];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }

@@ -51,7 +51,7 @@ extern NSString *cellIdentifier;
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     TableViewCell *cell =
-    [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    [tableView dequeueReusableCellWithIdentifier:@"SimpleIdentifier"];
     CurrencyInfo *exemplair =
     [dataBaseManager.fetchedArrayOfCurrencyInfo objectAtIndex:indexPath.row];
     cell.nameLabel.text = exemplair.abbrev;

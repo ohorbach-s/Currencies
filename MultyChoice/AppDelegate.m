@@ -52,9 +52,7 @@ performFetchWithCompletionHandler:
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
-    /* [[NSNotificationCenter defaultCenter] postNotificationName:@"removeMainCurrencyCheck"
-     object:nil];*/
-    
+       
     NSError *error;
     [self.managedObjectContext save:&error];
     

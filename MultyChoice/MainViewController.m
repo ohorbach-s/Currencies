@@ -24,16 +24,19 @@ static NSString *addSegueIdentifier = @"Add";
 @implementation MainViewController
 - (void)viewDidLoad {
     [super viewDidLoad];
-    dataBaseManager = [DataBaseManager sharedManager];
-    if ([dataBaseManager checkApplicationLaunch:appLauchKey]) {
-        [dataBaseManager rememberAboutApplicationLaunchWithKey:appLauchKey];
+    if (![DataBaseManager checkApplicationLaunch:appLauchKey]) {
+        [DataBaseManager rememberAboutApplicationLaunchWithKey:appLauchKey];
         [DataBaseManager startWorkWithCurrencyRateAplication];
-        CurrencyInfo * tempCur = [dataBaseManager.fetchedArrayOfCurrencyInfo firstObject];
-        [self  setTheMainCurrency:tempCur.abbrev : tempCur.fullName :tempCur.icon];
+        dataBaseManager = [DataBaseManager sharedManager];
+        CurrencyInfo *temp = [dataBaseManager.fetchedArrayOfCurrencyInfo firstObject];
+        [self  setTheMainCurrency:temp.abbrev :temp.fullName :temp.icon];
+        [dataBaseManager rememberAboutMainCurrency:temp.abbrev withKey:mainCurrencyKey];
     }
+    dataBaseManager = [DataBaseManager sharedManager];
     arrayOfSelectedCurrencies = [[NSMutableArray alloc] init];
     outputCurrencies = [[NSMutableArray alloc] init];
     NSString* abbrevMain = [dataBaseManager recallAboutMainCurrencyUsingKey:mainCurrencyKey];
+    
     for (CurrencyInfo* temp in dataBaseManager.fetchedArrayOfCurrencyInfo){
         if ([temp.abbrev isEqualToString:abbrevMain]){
             [self  setTheMainCurrency:temp.abbrev :temp.fullName :temp.icon];  }

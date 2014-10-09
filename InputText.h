@@ -22,5 +22,6 @@
 
 - (void)checkTyping;
 -(void)customButton;
+-(void)reloadFromInput;
 
 @end
