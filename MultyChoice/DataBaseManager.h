@@ -15,8 +15,8 @@
 
 +(id)sharedManager;
 +(void) startWorkWithCurrencyRateAplication;
--(void)rememberAboutMainCurrency: (NSString *) mainCurrencyName withKey: (NSString *) key;
-+(BOOL)checkApplicationLaunch: (NSString *) key;
-+(void)rememberAboutApplicationLaunchWithKey:(NSString *) key;
--(NSString *) recallAboutMainCurrencyUsingKey: (NSString*) key;
+//-(void)rememberAboutMainCurrency: (NSString *) mainCurrencyName withKey: (NSString *) key;
+//+(BOOL)checkApplicationLaunch: (NSString *) key;
+//+(void)rememberAboutApplicationLaunchWithKey:(NSString *) key;
+//-(NSString *) recallAboutMainCurrencyUsingKey: (NSString*) key;
 @end

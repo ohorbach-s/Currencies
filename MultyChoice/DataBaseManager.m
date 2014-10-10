@@ -60,18 +60,11 @@
 // fill the DB when the app is launched for the first time
 +(void)startWorkWithCurrencyRateAplication {
     [CurrencyInfo firstCurrencyInfoInitialization];                         // creating currency information entity
-//
+
     NSMutableDictionary *result = [ParsingDataFromYahoo synchronousRequest];
     if (result != nil) {
         [RateHistory newEntityObject:result];
-
-    
-    //[ParsingDataFromYahoo
-//     asynchronousRequestWithcompletionHandler: ^(NSMutableDictionary *rateDict) {           // implementing the asynchronous
-//         if (rateDict != nil) {
-//             [RateHistory newEntityObject:rateDict];
-//                                                        // filling the rate entity
-         } else {                                       // in case there is no internet connection available =D
+    } else {                                       // in case there is no internet connection available =D
              UIAlertView *message = [[UIAlertView alloc]
                                      initWithTitle:@"No Internet connection"
                                      message:@"The app is launched for the first time "
@@ -81,26 +74,24 @@
                                      otherButtonTitles:nil];
              [message show];                         // displaynig the relevant alert
          }
-//     }];
 }
 
--(void)rememberAboutMainCurrency: (NSString *) mainCurrencyAbbreviation withKey: (NSString *) key {
-    [[NSUserDefaults standardUserDefaults] setValue:mainCurrencyAbbreviation
-                                             forKey:key];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-}
-
-
-+(BOOL)checkApplicationLaunch: (NSString *) key {
-    BOOL rezult = [[NSUserDefaults standardUserDefaults] boolForKey:key];
-    return rezult;
-}
-
-+(void)rememberAboutApplicationLaunchWithKey:(NSString *) key {
-    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:key];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-}
--(NSString *) recallAboutMainCurrencyUsingKey: (NSString*) key {
-    return [[NSUserDefaults standardUserDefaults] valueForKey:key];
- }
+//-(void)rememberAboutMainCurrency: (NSString *) mainCurrencyAbbreviation withKey: (NSString *) key {
+//    [[NSUserDefaults standardUserDefaults] setValue:mainCurrencyAbbreviation
+//                                             forKey:key];
+//    [[NSUserDefaults standardUserDefaults] synchronize];
+//}
+//
+//+(BOOL)checkApplicationLaunch: (NSString *) key {
+//    BOOL rezult = [[NSUserDefaults standardUserDefaults] boolForKey:key];
+//    return rezult;
+//}
+//
+//+(void)rememberAboutApplicationLaunchWithKey:(NSString *) key {
+//    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:key];
+//    [[NSUserDefaults standardUserDefaults] synchronize];
+//}
+//-(NSString *) recallAboutMainCurrencyUsingKey: (NSString*) key {
+//    return [[NSUserDefaults standardUserDefaults] valueForKey:key];
+//}
 @end

@@ -24,18 +24,18 @@ static NSString *addSegueIdentifier = @"Add";
 @implementation MainViewController
 - (void)viewDidLoad {
     [super viewDidLoad];
-    if (![DataBaseManager checkApplicationLaunch:appLauchKey]) {
-        [DataBaseManager rememberAboutApplicationLaunchWithKey:appLauchKey];
+    if (![DefaultManager checkApplicationLaunch:appLauchKey]) {
+        [DefaultManager rememberAboutApplicationLaunchWithKey:appLauchKey];
         [DataBaseManager startWorkWithCurrencyRateAplication];
         dataBaseManager = [DataBaseManager sharedManager];
         CurrencyInfo *temp = [dataBaseManager.fetchedArrayOfCurrencyInfo firstObject];
         [self  setTheMainCurrency:temp.abbrev :temp.fullName :temp.icon];
-        [dataBaseManager rememberAboutMainCurrency:temp.abbrev withKey:mainCurrencyKey];
+        [DefaultManager rememberAboutMainCurrency:temp.abbrev withKey:mainCurrencyKey];
     }
     dataBaseManager = [DataBaseManager sharedManager];
     arrayOfSelectedCurrencies = [[NSMutableArray alloc] init];
     outputCurrencies = [[NSMutableArray alloc] init];
-    NSString* abbrevMain = [dataBaseManager recallAboutMainCurrencyUsingKey:mainCurrencyKey];
+    NSString* abbrevMain = [DefaultManager recallAboutMainCurrencyUsingKey:mainCurrencyKey];
     
     for (CurrencyInfo* temp in dataBaseManager.fetchedArrayOfCurrencyInfo){
         if ([temp.abbrev isEqualToString:abbrevMain]){
@@ -121,14 +121,14 @@ static NSString *addSegueIdentifier = @"Add";
                          into:[tempCurrencyRate
                                valueForKey:[tempCurrency.abbrev
                                             lowercaseString]]];
-    cell.sumLabel.text = [NSString stringWithFormat:@"%.2f", resultRate];
+    cell.sumLabel.text = [NSString stringWithFormat:@"%.3f", resultRate];
     return cell;
 }
 
 // change the currency to be converted into the target ones
 - (void)setMainCurrency:(CurrencyInfo*)selectedMain {
     [self setTheMainCurrency:selectedMain.abbrev :selectedMain.fullName :selectedMain.icon];
-    [dataBaseManager rememberAboutMainCurrency:selectedMain.abbrev withKey:mainCurrencyKey];
+    [DefaultManager rememberAboutMainCurrency:selectedMain.abbrev withKey:mainCurrencyKey];
     [self.view addSubview:self.mainImage];                                       //add animation for main currency
     [AnimationFile addFallAnimationForLayer:self.mainImage.layer];
     [self.view addSubview:self.mainFullName];

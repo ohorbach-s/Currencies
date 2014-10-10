@@ -17,6 +17,7 @@
 #import "ManualRefresh.h"
 #import "InputText.h"
 #import "AnimationFile.h"
+#import "DefaultManager.h"
 
 @interface MainViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, AddCurrencyDelegate,ReloadTableViewDelegate>
 

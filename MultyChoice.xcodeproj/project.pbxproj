@@ -45,6 +45,7 @@
 		8E93BE8019CF208B00C3C294 /* CurrencyInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E93BE7F19CF208B00C3C294 /* CurrencyInfo.m */; };
 		8E93BE8319CF208B00C3C294 /* RateHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E93BE8219CF208B00C3C294 /* RateHistory.m */; };
 		8EB9DD6B19DEB6AE00F461B1 /* InputText.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EB9DD6A19DEB6AE00F461B1 /* InputText.m */; };
+		8EFA0BD519E7C067004AFDB5 /* DefaultManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EFA0BD419E7C067004AFDB5 /* DefaultManager.m */; };
 		8EFEC7EF19E2AED500E4EEF9 /* AnimationFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EFEC7EE19E2AED500E4EEF9 /* AnimationFile.m */; };
 /* End PBXBuildFile section */
 
@@ -114,6 +115,8 @@
 		8E93BE8219CF208B00C3C294 /* RateHistory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RateHistory.m; path = ../RateHistory.m; sourceTree = "<group>"; };
 		8EB9DD6919DEB6AE00F461B1 /* InputText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputText.h; sourceTree = "<group>"; };
 		8EB9DD6A19DEB6AE00F461B1 /* InputText.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputText.m; sourceTree = "<group>"; };
+		8EFA0BD319E7C067004AFDB5 /* DefaultManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultManager.h; sourceTree = "<group>"; };
+		8EFA0BD419E7C067004AFDB5 /* DefaultManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefaultManager.m; sourceTree = "<group>"; };
 		8EFEC7ED19E2AED500E4EEF9 /* AnimationFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AnimationFile.h; path = MultyChoice/AnimationFile.h; sourceTree = "<group>"; };
 		8EFEC7EE19E2AED500E4EEF9 /* AnimationFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AnimationFile.m; path = MultyChoice/AnimationFile.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -375,6 +378,7 @@
 		8E9BCC1D19E56F340025453A /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				8EFA0BD219E7C00C004AFDB5 /* DefaultManager */,
 				8E33C4BA19DD5ADB0037470C /* CurrencyCalculation */,
 				8E33C4B919DD5AA60037470C /* ParsingDataFromYahoo */,
 				8E33C4B319DD50E40037470C /* DataBaseManager */,
@@ -394,6 +398,15 @@
 				8EB9DD6A19DEB6AE00F461B1 /* InputText.m */,
 			);
 			name = " InputText";
+			sourceTree = "<group>";
+		};
+		8EFA0BD219E7C00C004AFDB5 /* DefaultManager */ = {
+			isa = PBXGroup;
+			children = (
+				8EFA0BD319E7C067004AFDB5 /* DefaultManager.h */,
+				8EFA0BD419E7C067004AFDB5 /* DefaultManager.m */,
+			);
+			name = DefaultManager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -517,6 +530,7 @@
 				8DE7496519BCA62400DD24CC /* SelectionListViewController.m in Sources */,
 				7B9AAFA419B9C2C60087210E /* MainViewController.m in Sources */,
 				8E93BE8319CF208B00C3C294 /* RateHistory.m in Sources */,
+				8EFA0BD519E7C067004AFDB5 /* DefaultManager.m in Sources */,
 				8E80AA4D19D57A610014694E /* UsedData.m in Sources */,
 				8408D59B19CDC4A900435157 /* CurrencyCalculation.m in Sources */,
 				841621E919C9C2C2007E381F /* RTModel.xcdatamodeld in Sources */,
