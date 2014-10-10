@@ -1,5 +1,5 @@
 //
-//  RTAppDelegate.h
+//  AppDelegate.h
 //  MultyChoice
 //
 //  Created by Andriy on 9/5/14.
@@ -7,11 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "RefreshBackground.h"
-
-@class  MainViewController;
-@class SelectionListViewController;
-
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 

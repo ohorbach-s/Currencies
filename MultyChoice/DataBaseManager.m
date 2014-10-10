@@ -25,8 +25,9 @@
 - (id)init {
     
     if (self = [super init]) {
-        _fetchedArrayOfCurrencyInfo = [[NSMutableArray alloc] init];
+        _arrayOfAllCurrencyInfo = [[NSMutableArray alloc] init];
         _fetchedRateHistory = [[NSMutableArray alloc] init];
+        _selectedCurrencies = [[NSMutableArray alloc] init];
         [self extractDataBase];
     }
     return self;
@@ -44,7 +45,7 @@
     [req setEntity:entityDesc];
     NSArray *tempArrayForCurrencyInfo =
     [context executeFetchRequest:req error:&error];
-    _fetchedArrayOfCurrencyInfo =
+    _arrayOfAllCurrencyInfo =
     [NSMutableArray arrayWithArray:tempArrayForCurrencyInfo];
     NSFetchRequest *mainReq = [NSFetchRequest new];
     NSString *rateHistoryEntityName = @"RateHistory";
@@ -58,40 +59,23 @@
     [NSMutableArray arrayWithArray:fetchArrayForRateHistory];
 }
 // fill the DB when the app is launched for the first time
-+(void)startWorkWithCurrencyRateAplication {
++(void)startWorkWithCurrencyRateAplication{
     [CurrencyInfo firstCurrencyInfoInitialization];                         // creating currency information entity
 
     NSMutableDictionary *result = [ParsingDataFromYahoo synchronousRequest];
-    if (result != nil) {
+    if (result) {
         [RateHistory newEntityObject:result];
-    } else {                                       // in case there is no internet connection available =D
-             UIAlertView *message = [[UIAlertView alloc]
-                                     initWithTitle:@"No Internet connection"
-                                     message:@"The app is launched for the first time "
-                                     @"and Data source is empty"
-                                     delegate:nil
-                                     cancelButtonTitle:NSLocalizedString(@"OK", nil)
-                                     otherButtonTitles:nil];
-             [message show];                         // displaynig the relevant alert
-         }
+    }else {
+        [AlertDisplay emptyDataBaseAlertViewDisplay];    // displaynig the relevant alert
+    }
+//    [ParsingDataFromYahoo
+//     asynchronousRequestWithcompletionHandler: ^(NSMutableDictionary *rateDict) {           // implementing the asynchronous
+//         if (rateDict != nil) {
+//             [RateHistory newEntityObject:rateDict];
+//             completionHandler(YES);
+//         } else {
+//            [AlertDisplay emptyDataBaseAlertViewDisplay];
+//        }
+//    }];
 }
-
-//-(void)rememberAboutMainCurrency: (NSString *) mainCurrencyAbbreviation withKey: (NSString *) key {
-//    [[NSUserDefaults standardUserDefaults] setValue:mainCurrencyAbbreviation
-//                                             forKey:key];
-//    [[NSUserDefaults standardUserDefaults] synchronize];
-//}
-//
-//+(BOOL)checkApplicationLaunch: (NSString *) key {
-//    BOOL rezult = [[NSUserDefaults standardUserDefaults] boolForKey:key];
-//    return rezult;
-//}
-//
-//+(void)rememberAboutApplicationLaunchWithKey:(NSString *) key {
-//    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:key];
-//    [[NSUserDefaults standardUserDefaults] synchronize];
-//}
-//-(NSString *) recallAboutMainCurrencyUsingKey: (NSString*) key {
-//    return [[NSUserDefaults standardUserDefaults] valueForKey:key];
-//}
 @end

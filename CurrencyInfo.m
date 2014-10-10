@@ -13,6 +13,8 @@
 @dynamic fullName;
 @dynamic icon;
 @dynamic checked;
+@dynamic rate;
+
 
 + (void)firstCurrencyInfoInitialization {
     UsedData *getData = [[UsedData alloc] initData];
@@ -25,7 +27,7 @@
         newResult.abbrev = [getData.shortNames objectAtIndex:j];
         newResult.fullName = [getData.fullNames objectAtIndex:j];
         newResult.icon = [getData.flags objectAtIndex:j];
-        newResult.checked = 0;
+        newResult.checked = nil;
         NSError *error;
         [context save:&error];
     }

@@ -10,12 +10,17 @@
 #import <CoreData/CoreData.h>
 #import "AppDelegate.h"
 #import "UsedData.h"
+
+@class  RateHistory;
+
 @interface CurrencyInfo : NSManagedObject
 
 @property (nonatomic, retain) NSString * abbrev;
 @property (nonatomic, retain) NSString * fullName;
 @property (nonatomic, retain) NSString * icon;
 @property (nonatomic, retain) NSNumber * checked;
+@property (nonatomic, retain) RateHistory *rate;
+
 
 +(void) firstCurrencyInfoInitialization;
 

@@ -14,20 +14,18 @@
 #import "AppDelegate.h"
 #import "CurrencyCalculation.h"
 #import "DataBaseManager.h"
-#import "ManualRefresh.h"
 #import "InputText.h"
 #import "AnimationFile.h"
-#import "DefaultManager.h"
+#import "AppLaunchDefaultManager.h"
+#import "RefreshData.h"
 
-@interface MainViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, AddCurrencyDelegate,ReloadTableViewDelegate>
+@interface MainViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate,ReloadTableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *myTableView;
 @property (weak, nonatomic) IBOutlet UILabel *mainName;
 @property (weak, nonatomic) IBOutlet UILabel *mainFullName;
 @property (weak, nonatomic) IBOutlet UIImageView *mainImage;
 @property (weak, nonatomic) IBOutlet InputText *currencyAmount;
-@property (nonatomic,strong)CurrencyInfo *mainSaved;
-@property (nonatomic, strong)CurrencyInfo *mainSaved2;
 @property (assign, nonatomic) CATransform3D initialTransformation;
 @property (nonatomic, strong) NSMutableSet *shownIndexes;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;

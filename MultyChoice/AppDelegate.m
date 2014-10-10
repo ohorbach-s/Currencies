@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import "MainViewController.h"
-#import "SelectionListViewController.h"
+
 
 @implementation AppDelegate
 
@@ -34,7 +34,7 @@ performFetchWithCompletionHandler:
     (UINavigationController *)self.window.rootViewController;
     MainViewController *viewController =
     [[navigationController viewControllers] firstObject];
-    [RefreshBackground backgroundRefresh:^(UIBackgroundFetchResult result) {
+    [RefreshData backgroundRefresh:^(UIBackgroundFetchResult result) {
         completionHandler(result);
         NSDate *fetchEnd = [NSDate date];
         NSTimeInterval timeElapsed = [fetchEnd timeIntervalSinceDate:fetchStart];

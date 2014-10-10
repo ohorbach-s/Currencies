@@ -8,7 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "RateHistory.h"
-#import "DataBaseManager.h"
+#import "AlertDisplay.h"
+//#import "DataBaseManager.h"
 
 @interface ParsingDataFromYahoo : NSObject
 + (void) asynchronousRequestWithcompletionHandler:(void (^)(NSMutableDictionary *)) completionHandler;

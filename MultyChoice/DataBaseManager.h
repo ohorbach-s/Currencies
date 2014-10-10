@@ -8,15 +8,15 @@
 
 #import <Foundation/Foundation.h>
 #import "CurrencyInfo.h"
+#import "AlertDisplay.h"
 
 @interface DataBaseManager : NSObject
-@property (nonatomic, strong) NSMutableArray *fetchedArrayOfCurrencyInfo;
+@property (nonatomic, strong) NSMutableArray *arrayOfAllCurrencyInfo;
+@property (nonatomic,strong) NSMutableArray *selectedCurrencies;
+@property (nonatomic,strong) CurrencyInfo *mainCurrencySaved;
 @property (nonatomic, strong) NSMutableArray *fetchedRateHistory;
 
 +(id)sharedManager;
 +(void) startWorkWithCurrencyRateAplication;
-//-(void)rememberAboutMainCurrency: (NSString *) mainCurrencyName withKey: (NSString *) key;
-//+(BOOL)checkApplicationLaunch: (NSString *) key;
-//+(void)rememberAboutApplicationLaunchWithKey:(NSString *) key;
-//-(NSString *) recallAboutMainCurrencyUsingKey: (NSString*) key;
+
 @end

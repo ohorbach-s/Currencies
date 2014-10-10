@@ -5,6 +5,7 @@
         <attribute name="checked" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="fullName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="icon" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="rate" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="RateHistory" inverseName="mainCurrencySaved" inverseEntity="RateHistory" syncable="YES"/>
     </entity>
     <entity name="RateHistory" representedClassName="RateHistory" syncable="YES">
         <attribute name="aud" optional="YES" attributeType="String" syncable="YES"/>
@@ -18,9 +19,10 @@
         <attribute name="uah" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="usd" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="xau" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="mainCurrencySaved" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CurrencyInfo" inverseName="rate" inverseEntity="CurrencyInfo" syncable="YES"/>
     </entity>
     <elements>
-        <element name="CurrencyInfo" positionX="-603" positionY="27" width="128" height="105"/>
-        <element name="RateHistory" positionX="-371" positionY="27" width="128" height="210"/>
+        <element name="CurrencyInfo" positionX="-702" positionY="36" width="128" height="118"/>
+        <element name="RateHistory" positionX="-371" positionY="27" width="128" height="223"/>
     </elements>
 </model>

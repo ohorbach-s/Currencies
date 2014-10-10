@@ -13,7 +13,6 @@
 
 // implementing the asynchronous request for the manual update
 + (void)asynchronousRequestWithcompletionHandler:(void (^)(NSMutableDictionary *))completionHandler {
-    DataBaseManager *dataBaseManager = [DataBaseManager sharedManager];
     NSURL *url;
     NSString *urlString = [NSString
                            stringWithFormat:@"https://query.yahooapis.com/v1/public/"
@@ -49,40 +48,13 @@
              }
              completionHandler(pairResult);
          } else {
-             NSDateFormatter *dateFormatter = [NSDateFormatter new];
-             [dateFormatter setDateFormat:@"dd-MM-yyyy hh:mm"];
-             
-             NSDate *tempDate =
-             [[dataBaseManager.fetchedRateHistory firstObject] date];
-             
-             NSString *strMyDate = [dateFormatter stringFromDate:tempDate];
-             
-             if (tempDate == nil) {
-                 UIAlertView *message = [[UIAlertView alloc]
-                                         initWithTitle:@"No Internet connection"
-                                         message:nil
-                                         delegate:nil
-                                         cancelButtonTitle:@"Okay :C"
-                                         otherButtonTitles:nil];
-                 [message show];
-                 
-             } else {
-                 NSString *datestring = [NSString
-                                         stringWithFormat:@"Data is valid for %@", strMyDate];
-                 UIAlertView *message = [[UIAlertView alloc]
-                                         initWithTitle:@"No Internet connection"
-                                         message:datestring
-                                         delegate:nil
-                                         cancelButtonTitle:@"Okay"
-                                         otherButtonTitles:nil];
-                 [message show];
-             }
+             [AlertDisplay noInternetAlertViewDisplay];
              completionHandler(nil);
          }
      }];
 }
 // implementing the synchronous request for the background update
-+ (NSMutableDictionary*)synchronousRequest {
++ (NSMutableDictionary*)synchronousRequest {                         ////add alert view, if it need
     
     NSArray* returnedRate = nil;
     NSURL* url;
@@ -115,6 +87,8 @@
             NSString* newstrValue = [tmp objectForKey:@"Rate"];
             [pairResult setObject:newstrValue forKey:strID];
         }
+    } else {
+        return nil;
     }
     return pairResult;
 }

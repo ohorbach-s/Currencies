@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@protocol ReloadTableViewDelegate <NSObject>
+@protocol ReloadTableViewDelegate <NSObject, UITextFieldDelegate>
 
 - (void)reloadTable;
 

@@ -7,7 +7,6 @@
 //
 
 #import "RateHistory.h"
-#import "CurrencyInfo.h"
 #import "AppDelegate.h"
 
 @implementation RateHistory
@@ -23,6 +22,8 @@
 @dynamic cny;
 @dynamic jpy;
 @dynamic eur;
+@dynamic mainCurrencySaved;
+
 // rewrite the last retrieved Entity object
 + (void)rewriteEntityObject:(RateHistory *)objectToRewrite
            withAcceptedData:(NSMutableDictionary *)

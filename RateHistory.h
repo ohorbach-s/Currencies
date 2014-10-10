@@ -8,10 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
-#import "UsedData.h"
 #import "ParsingDataFromYahoo.h"
-@class CurrencyInfo;
+#import "UsedData.h"
 
+@class CurrencyInfo;
 
 @interface RateHistory : NSManagedObject
 
@@ -26,18 +26,13 @@
 @property (nonatomic, retain) NSString * cny;
 @property (nonatomic, retain) NSString * jpy;
 @property (nonatomic, retain) NSString * eur;
+@property (nonatomic, retain) CurrencyInfo *mainCurrencySaved;
 
 @end
 
 @interface RateHistory (CoreDataGeneratedAccessors)
 
-
 +(void) rewriteEntityObject :(RateHistory*)objectToRewrite withAcceptedData:(NSMutableDictionary*)dict;
 +(void) newEntityObject :(NSMutableDictionary*)dict;
-- (void)addCurrenciesObject:(CurrencyInfo *)value;
-- (void)removeCurrenciesObject:(CurrencyInfo *)value;
-- (void)addCurrencies:(NSSet *)values;
-- (void)removeCurrencies:(NSSet *)values;
-
 
 @end

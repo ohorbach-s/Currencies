@@ -18,6 +18,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         _dots = 0;
+        //self.text = @"1";
     }
     return self;
 }

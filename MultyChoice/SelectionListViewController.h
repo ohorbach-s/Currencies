@@ -11,19 +11,19 @@
 #import "AppDelegate.h"
 #import "UsedData.h"
 #import "CurrencyInfo.h"
+#import "RateHistory.h"
 #import "DataBaseManager.h"
 #import "AnimationFile.h"
 #import <QuartzCore/QuartzCore.h>
 
 @protocol AddCurrencyDelegate <NSObject>
-- (void)setMainCurrency:(CurrencyInfo*)SelectedMain;
+- (void)receiveMainCurrencyFromSelectionTable:(CurrencyInfo*)SelectedMain;
 @end
 
 @interface SelectionListViewController
     : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 @property(nonatomic) BOOL selectedMainSegue;
-@property(nonatomic) unsigned int amount;
 @property(nonatomic, weak) id<AddCurrencyDelegate> delegate;
 @property(strong, nonatomic) NSString *selectedCurrency;
 @property (assign, nonatomic) CATransform3D initialTransformation;

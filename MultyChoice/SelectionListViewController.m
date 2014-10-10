@@ -13,7 +13,6 @@ extern NSString *cellIdentifier;
 
 @interface SelectionListViewController () {
     DataBaseManager *dataBaseManager;
-    UsedData *data;
 }
 @property(weak, nonatomic) IBOutlet UITableView *selectionTableView;
 @end
@@ -22,78 +21,56 @@ extern NSString *cellIdentifier;
 - (void)viewDidLoad {
     [super viewDidLoad];
     dataBaseManager = [DataBaseManager sharedManager];
-    self.navigationController.navigationBar.titleTextAttributes =
-    @{NSForegroundColorAttributeName : [UIColor whiteColor]};
-    self.selectionTableView.backgroundColor = [UIColor
-                                           colorWithPatternImage:[UIImage imageNamed:backgroundImage]];
-    data = [[UsedData alloc] initData];
-    
-    CGFloat rotationAngleDegrees = -15;
-    CGFloat rotationAngleRadians = rotationAngleDegrees * (M_PI/180);
-    CGPoint offsetPositioning = CGPointMake(-20, -20);
-    
-    CATransform3D transform = CATransform3DIdentity;
-    transform = CATransform3DRotate(transform, rotationAngleRadians, 0.0, 0.0, 1.0);
-    transform = CATransform3DTranslate(transform, offsetPositioning.x, offsetPositioning.y, 0.0);
-    _initialTransformation = transform;
-    _shownIndexes = [NSMutableSet set];
-}
+    [self makeApplicationMoreStylish];
+    [self makeAnimation];
+ }
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
 
-#pragma mark - UITableViewDataSource:
 - (NSInteger)tableView:(UITableView *)tableView
  numberOfRowsInSection:(NSInteger)section {
-    return [data.shortNames count];
+    return [dataBaseManager.arrayOfAllCurrencyInfo count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     TableViewCell *cell =
-    [tableView dequeueReusableCellWithIdentifier:@"SimpleIdentifier"];
+    [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     CurrencyInfo *exemplair =
-    [dataBaseManager.fetchedArrayOfCurrencyInfo objectAtIndex:indexPath.row];
+    [dataBaseManager.arrayOfAllCurrencyInfo objectAtIndex:indexPath.row];
     cell.nameLabel.text = exemplair.abbrev;
     cell.fullNameLabel.text = exemplair.fullName;
     cell.flagImageView.image = [UIImage imageNamed:exemplair.icon];
     cell.sumLabel.text = nil;
     if (!self.selectedMainSegue) {
-        if (exemplair.checked) {
+        for (CurrencyInfo *temp in dataBaseManager.selectedCurrencies) {
+        if ([exemplair isEqual:temp]) {
             cell.accessoryType = UITableViewCellAccessoryCheckmark;
         }
     }
-    if (![self.shownIndexes containsObject:indexPath]) {
-        [self.shownIndexes addObject:indexPath];
-        cell.layer.transform = self.initialTransformation;
-        cell.layer.opacity = 1.8;
-        [UIView animateWithDuration:0.7 animations:^{
-            cell.layer.transform = CATransform3DIdentity;
-            cell.layer.opacity = 1;
-        }];
     }
     return cell;
 }
 
-#pragma mark - UITableViewDelegate:
 - (void)tableView:(UITableView *)tableView
 didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     [AnimationFile shakeAnimation:cell];
-    CurrencyInfo *exemplair = [dataBaseManager.fetchedArrayOfCurrencyInfo
+    CurrencyInfo *exemplair = [dataBaseManager.arrayOfAllCurrencyInfo
                                objectAtIndex:indexPath.row];
     if (self.selectedMainSegue) {
-        [[self delegate] setMainCurrency:exemplair];
+        dataBaseManager.mainCurrencySaved = exemplair;
+       // RateHistory *tempRate = [[dataBaseManager.fetchedRateHistory firstObject] m];
+        [[dataBaseManager.fetchedRateHistory firstObject] setMainCurrencySaved:exemplair];
         [self dismissViewControllerAnimated:YES completion:nil];
     } else {
-        
         if (cell.accessoryType == UITableViewCellAccessoryNone) {
-                cell.accessoryType = UITableViewCellAccessoryCheckmark;
-                exemplair.checked = @(YES);
-            
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+            exemplair.checked = @(YES);
         } else if (cell.accessoryType == UITableViewCellAccessoryCheckmark) {
             cell.accessoryType = UITableViewCellAccessoryNone;
-            self.amount -= 1;
             exemplair.checked = nil;
         }
     }
@@ -112,16 +89,26 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     }
 }
 - (IBAction)done:(UIBarButtonItem *)sender{
-    [self dismissViewControllerAnimated:NO completion:^{
-        UITableView *tableView;
-        static NSString *SimpleIdentifier = @"SimpleIdentifier";
-        TableViewCell *cell =
-        [tableView dequeueReusableCellWithIdentifier:SimpleIdentifier];
-        cell.layer.transform = CATransform3DIdentity;
-        cell.layer.transform = CATransform3DMakeRotation(M_PI_2, 0.1, 0, 0);
-        CATransform3DRotate(cell.layer.transform, 0.8, 0.8, 0.8, 0.5);
-        cell.layer.opacity = 1;
-    }];
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(void)makeAnimation {
+    CGFloat rotationAngleDegrees = -15;
+    CGFloat rotationAngleRadians = rotationAngleDegrees * (M_PI/180);
+    CGPoint offsetPositioning = CGPointMake(-20, -20);
+    
+    CATransform3D transform = CATransform3DIdentity;
+    transform = CATransform3DRotate(transform, rotationAngleRadians, 0.0, 0.0, 1.0);
+    transform = CATransform3DTranslate(transform, offsetPositioning.x, offsetPositioning.y, 0.0);
+    _initialTransformation = transform;
+    _shownIndexes = [NSMutableSet set];
+}
+
+-(void) makeApplicationMoreStylish {
+    self.navigationController.navigationBar.titleTextAttributes =
+    @{NSForegroundColorAttributeName : [UIColor whiteColor]};
+    self.selectionTableView.backgroundColor = [UIColor
+                                               colorWithPatternImage:[UIImage imageNamed:backgroundImage]];
 }
 
 @end
