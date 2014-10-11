@@ -20,13 +20,11 @@ static NSString *addSegueIdentifier = @"Add";
     [super viewDidLoad];
     [self makeApplicationMoreStylish];
     if (![AppLaunchDefaultManager checkApplicationLaunch]) {
-        [self firstLoadOfApplication];
+      //  [self firstLoadOfApplication];
     } else {
         dataBaseManager = [DataBaseManager sharedManager];
-        dataBaseManager.mainCurrencySaved = [[dataBaseManager.fetchedRateHistory firstObject] mainCurrencySaved];
-        [self setTheMainCurrency:dataBaseManager.mainCurrencySaved];
+        [self setTheMainCurrency:[[dataBaseManager.fetchedRateHistory firstObject] mainCurrencySaved]];
     }
-    //RateHistory *tempRate = [dataBaseManager.fetchedRateHistory firstObject];
     [self linkToTextField];
     self.currencyAmount.clearsOnBeginEditing = YES;
     [self createTableViewSwipeDownRefresh];
@@ -44,7 +42,7 @@ static NSString *addSegueIdentifier = @"Add";
     [AnimationFile animateTableViewAppearance:self.myTableView];
     [dataBaseManager.selectedCurrencies removeAllObjects];
     for (CurrencyInfo* temp in dataBaseManager.arrayOfAllCurrencyInfo) {
-        if ((temp.checked) && (![temp isEqual:dataBaseManager.mainCurrencySaved])) {
+        if ((temp.checked) && (![temp isEqual:[[dataBaseManager.fetchedRateHistory firstObject] mainCurrencySaved]])) {
             [dataBaseManager.selectedCurrencies addObject:temp];
         }
     }
@@ -57,7 +55,6 @@ static NSString *addSegueIdentifier = @"Add";
 - (void)prepareForSegue:(UIStoryboardSegue*)segue sender:(id)sender {
     UINavigationController* navigationController = segue.destinationViewController;
     SelectionListViewController* controller = [[navigationController viewControllers] firstObject];
-   // controller.delegate = self;
     if ([segue.identifier isEqualToString:mainSegueIdentifier]) {
         controller.selectedMainSegue = YES;
     }
@@ -73,43 +70,23 @@ static NSString *addSegueIdentifier = @"Add";
     CurrencyInfo* tempCurrency =
     [dataBaseManager.selectedCurrencies objectAtIndex:indexPath.row];
     TableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    cell.nameLabel.text = tempCurrency.abbrev;
-    cell.fullNameLabel.text = tempCurrency.fullName;
-    cell.flagImageView.image = [UIImage imageNamed:tempCurrency.icon];
-    RateHistory* tempCurrencyRate =
-    [dataBaseManager.fetchedRateHistory firstObject];
-  //  tempCurrencyRate.mainCurrencySaved = tempCurrency;
-    CurrencyCalculation* calculation = [CurrencyCalculation new];
-    double inputAmount = [self.currencyAmount.text doubleValue];
-    NSString *mainAbbrev = [tempCurrencyRate
-                            valueForKey:[self.mainName.text lowercaseString]];
-    NSString *curr = [tempCurrencyRate
-                      valueForKey:[tempCurrency.abbrev
-                                   lowercaseString]];
-    double resultRate = [calculation
-                         convertNumber:inputAmount
-                         OfCurrency:mainAbbrev
-                         into:curr];
-    cell.sumLabel.text = [NSString stringWithFormat:@"%.3f", resultRate];
-    return cell;
+//    if ([tempCurrency isEqual:[[dataBaseManager.fetchedRateHistory firstObject]mainCurrencySaved]]) {
+//        return cell;
+//    } else {
+        cell.nameLabel.text = tempCurrency.abbrev;
+        cell.fullNameLabel.text = tempCurrency.fullName;
+        cell.flagImageView.image = [UIImage imageNamed:tempCurrency.icon];
+        RateHistory* tempCurrencyRate =
+        [dataBaseManager.fetchedRateHistory firstObject];
+        CurrencyCalculation* calculation = [CurrencyCalculation new];
+        double resultRate = [calculation
+                             convertNumber:[self.currencyAmount.text doubleValue]
+                             OfCurrency:[tempCurrencyRate valueForKey:[self.mainName.text lowercaseString]]
+                             into:[tempCurrencyRate valueForKey:[tempCurrency.abbrev lowercaseString]]];
+        cell.sumLabel.text = [NSString stringWithFormat:@"%.3f", resultRate];
+        return cell;
+  //  }
 }
-
-// change the currency to be converted into the target ones
-//- (void)receiveMainCurrencyFromSelectionTable:(CurrencyInfo*)selectedMain {
-//    
-//    CurrencyInfo* temp = dataBaseManager.mainCurrencySaved;
-//    for (CurrencyInfo* inf in dataBaseManager.arrayOfAllCurrencyInfo) {
-//        if ([inf isEqual:temp]){
-//            inf.isMainCurrency = nil;
-//        }
-//    }
-//    [self setTheMainCurrency:selectedMain];
-//    [self.view addSubview:self.mainImage];                                       //add animation for main currency
-//    [AnimationFile addFallAnimationForLayer:self.mainImage.layer];
-//    [self.view addSubview:self.mainFullName];
-//    [AnimationFile addFallAnimationForLayer:self.mainFullName.layer];
-//    dataBaseManager.mainCurrencySaved = selectedMain;
-//}
 
 - (void)refreshTheMainTableView {
     [RefreshData refreshTableViewWithCompletionHandler:^(BOOL success) {
@@ -141,14 +118,10 @@ forRowAtIndexPath:(NSIndexPath*)indexPath {
 -(void)firstLoadOfApplication {
     [AppLaunchDefaultManager rememberAboutApplicationLaunchWithKey];
     [DataBaseManager startWorkWithCurrencyRateAplication];
-       
-            dataBaseManager = [DataBaseManager sharedManager];
-            dataBaseManager.mainCurrencySaved = [dataBaseManager.arrayOfAllCurrencyInfo firstObject];
-            //dataBaseManager.mainCurrencySaved.isMainCurrency = @(YES);
-            [self  setTheMainCurrency:dataBaseManager.mainCurrencySaved];
-            [self.myTableView reloadData];
-        
-
+    dataBaseManager = [DataBaseManager sharedManager];
+    [[dataBaseManager.fetchedRateHistory firstObject] setMainCurrencySaved:[dataBaseManager.arrayOfAllCurrencyInfo firstObject]];
+    [self  setTheMainCurrency:[[dataBaseManager.fetchedRateHistory firstObject] mainCurrencySaved]];
+    [self.myTableView reloadData];
 }
 
 -(void) makeApplicationMoreStylish {
@@ -171,25 +144,42 @@ forRowAtIndexPath:(NSIndexPath*)indexPath {
     [self.currencyAmount addTarget:self.currencyAmount
                             action:@selector(checkTyping)
                   forControlEvents:UIControlEventEditingChanged];
-    
 }
--(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
-    
+
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object
+                       change:(NSDictionary *)change context:(void *)context {
     if ([keyPath isEqualToString:@"mainCurrencySaved"]) {
-        self.mainName.text = dataBaseManager.mainCurrencySaved.abbrev;
-        self.mainFullName.text = dataBaseManager.mainCurrencySaved.fullName;
-        self.mainImage.image = [UIImage imageNamed:dataBaseManager.mainCurrencySaved.icon];
-        
-        [self.view addSubview:self.mainImage];                                       //add animation for main currency
+        self.mainName.text =  [object mainCurrencySaved].abbrev;
+        self.mainFullName.text = [object mainCurrencySaved].fullName;
+        self.mainImage.image = [UIImage imageNamed:[object mainCurrencySaved].icon];
+        [self.view addSubview:self.mainImage];
         [AnimationFile addFallAnimationForLayer:self.mainImage.layer];
         [self.view addSubview:self.mainFullName];
         [AnimationFile addFallAnimationForLayer:self.mainFullName.layer];
+        
+        if ([dataBaseManager.selectedCurrencies containsObject:[object mainCurrencySaved]]) {
+            
+        }
     }
-    
+//    if ([keyPath isEqualToString:@"checked"]) {
+//        NSNumber *newCheck = [change objectForKey:NSKeyValueChangeNewKey];
+//        if (([newCheck  isEqual: @(YES)])&&(![object isEqual
+//                                          :[[dataBaseManager.fetchedRateHistory firstObject] mainCurrencySaved]])) {
+//            [dataBaseManager.selectedCurrencies addObject:object];
+//        } else {
+//            [dataBaseManager.selectedCurrencies removeObject:object];
+//        }
+//    }
 }
 
 -(void)setObservingForMainCurrencyAndCheckmarks {
-    [dataBaseManager addObserver:self forKeyPath:@"mainCurrencySaved" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
+    [[dataBaseManager.fetchedRateHistory firstObject]addObserver:self
+                                                      forKeyPath:@"mainCurrencySaved"
+                                                         options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
+//    for (CurrencyInfo *temp in dataBaseManager.arrayOfAllCurrencyInfo ) {
+//        [temp addObserver:self forKeyPath:@"checked"
+//                  options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
+//    }
 }
 
 @end

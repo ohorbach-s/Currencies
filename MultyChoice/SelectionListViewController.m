@@ -23,7 +23,7 @@ extern NSString *cellIdentifier;
     dataBaseManager = [DataBaseManager sharedManager];
     [self makeApplicationMoreStylish];
     [self makeAnimation];
- }
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -46,10 +46,10 @@ extern NSString *cellIdentifier;
     cell.sumLabel.text = nil;
     if (!self.selectedMainSegue) {
         for (CurrencyInfo *temp in dataBaseManager.selectedCurrencies) {
-        if ([exemplair isEqual:temp]) {
-            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+            if ([exemplair isEqual:temp]) {
+                cell.accessoryType = UITableViewCellAccessoryCheckmark;
+            }
         }
-    }
     }
     return cell;
 }
@@ -61,8 +61,6 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     CurrencyInfo *exemplair = [dataBaseManager.arrayOfAllCurrencyInfo
                                objectAtIndex:indexPath.row];
     if (self.selectedMainSegue) {
-        dataBaseManager.mainCurrencySaved = exemplair;
-       // RateHistory *tempRate = [[dataBaseManager.fetchedRateHistory firstObject] m];
         [[dataBaseManager.fetchedRateHistory firstObject] setMainCurrencySaved:exemplair];
         [self dismissViewControllerAnimated:YES completion:nil];
     } else {

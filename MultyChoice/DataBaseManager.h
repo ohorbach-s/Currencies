@@ -13,7 +13,6 @@
 @interface DataBaseManager : NSObject
 @property (nonatomic, strong) NSMutableArray *arrayOfAllCurrencyInfo;
 @property (nonatomic,strong) NSMutableArray *selectedCurrencies;
-@property (nonatomic,strong) CurrencyInfo *mainCurrencySaved;
 @property (nonatomic, strong) NSMutableArray *fetchedRateHistory;
 
 +(id)sharedManager;
