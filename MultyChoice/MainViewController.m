@@ -20,7 +20,7 @@ static NSString *addSegueIdentifier = @"Add";
     [super viewDidLoad];
     [self makeApplicationMoreStylish];
     if (![AppLaunchDefaultManager checkApplicationLaunch]) {
-      //  [self firstLoadOfApplication];
+        [self firstLoadOfApplication];
     } else {
         dataBaseManager = [DataBaseManager sharedManager];
         [self setTheMainCurrency:[[dataBaseManager.fetchedRateHistory firstObject] mainCurrencySaved]];
