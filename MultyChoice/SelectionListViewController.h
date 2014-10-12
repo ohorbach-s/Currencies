@@ -29,6 +29,5 @@
 @property (assign, nonatomic) CATransform3D initialTransformation;
 @property (nonatomic, strong) NSMutableSet *shownIndexes;
 
-- (IBAction)done:(UIBarButtonItem *)sender;
 
 @end

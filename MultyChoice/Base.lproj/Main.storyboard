@@ -69,14 +69,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Currencies" id="7yc-cA-5fi">
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="pKP-MM-6yd">
-                            <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                            <connections>
-                                <action selector="done:" destination="FF8-c8-gex" id="fhJ-pl-yjB"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Currencies" id="7yc-cA-5fi"/>
                     <connections>
                         <outlet property="selectionTableView" destination="gxo-4e-tDX" id="Je0-jM-YrK"/>
                     </connections>
@@ -115,7 +108,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="kMu-bA-5XV" kind="modal" identifier="MainAdd" modalTransitionStyle="coverVertical" id="5TP-Ue-Iyz"/>
+                                    <segue destination="FF8-c8-gex" kind="push" identifier="MainAdd" id="5tB-4D-rSJ"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PPE-Gq-z6M">
@@ -188,7 +181,7 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="KD3-5v-02m">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
-                                <segue destination="kMu-bA-5XV" kind="modal" identifier="Add" modalTransitionStyle="coverVertical" id="ydm-wJ-v7c"/>
+                                <segue destination="FF8-c8-gex" kind="push" identifier="Add" id="PjF-pa-6m3"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -205,28 +198,11 @@
             <point key="canvasLocation" x="851" y="123"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="RS8-TG-hAs">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="kMu-bA-5XV" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="757-Wa-XZG">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="FF8-c8-gex" kind="relationship" relationship="rootViewController" id="VWR-Dd-uxV"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="pTZ-UX-oq7" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1264" y="123"/>
-        </scene>
-        <!--Navigation Controller-->
         <scene sceneID="FBH-2h-Mpv">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="d2b-VT-9B1" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackOpaque"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="nS1-3D-dwL">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -247,6 +223,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="5TP-Ue-Iyz"/>
+        <segue reference="5tB-4D-rSJ"/>
     </inferredMetricsTieBreakers>
 </document>

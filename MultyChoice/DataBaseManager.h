@@ -9,13 +9,16 @@
 #import <Foundation/Foundation.h>
 #import "CurrencyInfo.h"
 #import "AlertDisplay.h"
+#import "InputText.h"
 
 @interface DataBaseManager : NSObject
 @property (nonatomic, strong) NSMutableArray *arrayOfAllCurrencyInfo;
 @property (nonatomic,strong) NSMutableArray *selectedCurrencies;
 @property (nonatomic, strong) NSMutableArray *fetchedRateHistory;
+@property (nonatomic,weak)id<ReloadTableViewDelegate>reloadDelegate;
 
 +(id)sharedManager;
 +(void) startWorkWithCurrencyRateAplication;
+- (void)extractDataBase ;
 
 @end

@@ -23,6 +23,7 @@ extern NSString *cellIdentifier;
     dataBaseManager = [DataBaseManager sharedManager];
     [self makeApplicationMoreStylish];
     [self makeAnimation];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -62,7 +63,8 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
                                objectAtIndex:indexPath.row];
     if (self.selectedMainSegue) {
         [[dataBaseManager.fetchedRateHistory firstObject] setMainCurrencySaved:exemplair];
-        [self dismissViewControllerAnimated:YES completion:nil];
+        [self.navigationController popViewControllerAnimated:YES];
+        //        [self.navigationController popViewControllerAnimated:YES];
     } else {
         if (cell.accessoryType == UITableViewCellAccessoryNone) {
             cell.accessoryType = UITableViewCellAccessoryCheckmark;
@@ -75,7 +77,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath
-                 :(NSIndexPath *)indexPath {
+                :(NSIndexPath *)indexPath {
     if (![self.shownIndexes containsObject:indexPath]) {
         [self.shownIndexes addObject:indexPath];
         cell.layer.transform = self.initialTransformation;
@@ -85,9 +87,6 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
             cell.layer.opacity = 1;
         }];
     }
-}
-- (IBAction)done:(UIBarButtonItem *)sender{
-    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 -(void)makeAnimation {

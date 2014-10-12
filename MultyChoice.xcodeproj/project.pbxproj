@@ -250,6 +250,12 @@
 				8E93BE7F19CF208B00C3C294 /* CurrencyInfo.m */,
 				8E80AA4B19D57A610014694E /* UsedData.h */,
 				8E80AA4C19D57A610014694E /* UsedData.m */,
+				8408D59919CDC4A900435157 /* CurrencyCalculation.h */,
+				8408D59A19CDC4A900435157 /* CurrencyCalculation.m */,
+				841061AA19C784B600B85831 /* ParsingDataFromYahoo.h */,
+				841061AB19C784B600B85831 /* ParsingDataFromYahoo.m */,
+				8E33C4AF19DD503D0037470C /* DataBaseManager.h */,
+				8E33C4B019DD503D0037470C /* DataBaseManager.m */,
 			);
 			name = Model;
 			path = ..;
@@ -277,12 +283,6 @@
 			children = (
 				8E7F025219E8129700D80F0E /* RefreshData.h */,
 				8E7F025319E8129700D80F0E /* RefreshData.m */,
-				8408D59919CDC4A900435157 /* CurrencyCalculation.h */,
-				8408D59A19CDC4A900435157 /* CurrencyCalculation.m */,
-				841061AA19C784B600B85831 /* ParsingDataFromYahoo.h */,
-				841061AB19C784B600B85831 /* ParsingDataFromYahoo.m */,
-				8E33C4AF19DD503D0037470C /* DataBaseManager.h */,
-				8E33C4B019DD503D0037470C /* DataBaseManager.m */,
 				8E7F024F19E810B600D80F0E /* AppLaunchDefaultManager.h */,
 				8E7F025019E810B600D80F0E /* AppLaunchDefaultManager.m */,
 				8DE7496319BCA62400DD24CC /* SelectionListViewController.h */,

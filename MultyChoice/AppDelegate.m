@@ -24,7 +24,7 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [[UINavigationBar appearance]
      setBackgroundImage:[UIImage imageNamed:backgroundImage]
      forBarMetrics:UIBarMetricsDefault];
-    return YES;
+        return YES;
 }
 - (void)application:(UIApplication *)application
 performFetchWithCompletionHandler:

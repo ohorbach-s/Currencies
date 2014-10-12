@@ -16,8 +16,8 @@
     [ParsingDataFromYahoo asynchronousRequestWithcompletionHandler:^(NSMutableDictionary* rateDict) {
         if (rateDict != nil){
             [RateHistory rewriteEntityObject :exemplair withAcceptedData:rateDict];
-        }
-        completionHandler(YES);
+            completionHandler(YES);
+        } else completionHandler(NO);
     }];
 }
 
@@ -31,5 +31,4 @@
         NSLog(@"rewritten object --->>> from background fetch");
     }
 }
-
 @end

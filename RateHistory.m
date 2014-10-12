@@ -42,7 +42,7 @@ dict {
     [context save:&error];
 }
 // add new Entity object
-+ (void)newEntityObject:(NSMutableDictionary *)dict {
++ (RateHistory*)newEntityObject:(NSMutableDictionary *)dict {
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     NSManagedObjectContext *context = [appDelegate managedObjectContext];
     UsedData *getData = [[UsedData alloc] initData];
@@ -57,5 +57,6 @@ dict {
     newResult.date = now;
     NSError *error;
     [context save:&error];
+    return newResult;
 }
 @end

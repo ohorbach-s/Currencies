@@ -18,6 +18,8 @@ static NSString *addSegueIdentifier = @"Add";
 @implementation MainViewController
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    
     [self makeApplicationMoreStylish];
     if (![AppLaunchDefaultManager checkApplicationLaunch]) {
         [self firstLoadOfApplication];
@@ -30,7 +32,9 @@ static NSString *addSegueIdentifier = @"Add";
     [self createTableViewSwipeDownRefresh];
     self.shownIndexes = [NSMutableSet set];
     [self setObservingForMainCurrencyAndCheckmarks];
+    
 }
+
 - (void)reloadTable {
     [self.myTableView reloadData];
 }
@@ -46,15 +50,16 @@ static NSString *addSegueIdentifier = @"Add";
             [dataBaseManager.selectedCurrencies addObject:temp];
         }
     }
-    [self.myTableView reloadData];     ////  ???
+    [self.myTableView reloadData];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue*)segue sender:(id)sender {
-    UINavigationController* navigationController = segue.destinationViewController;
-    SelectionListViewController* controller = [[navigationController viewControllers] firstObject];
+    //UINavigationController* navigationController = segue.destinationViewController;
+    
+    SelectionListViewController* controller = segue.destinationViewController;    //[[navigationController viewControllers] firstObject];
     if ([segue.identifier isEqualToString:mainSegueIdentifier]) {
         controller.selectedMainSegue = YES;
     }
@@ -70,30 +75,28 @@ static NSString *addSegueIdentifier = @"Add";
     CurrencyInfo* tempCurrency =
     [dataBaseManager.selectedCurrencies objectAtIndex:indexPath.row];
     TableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-//    if ([tempCurrency isEqual:[[dataBaseManager.fetchedRateHistory firstObject]mainCurrencySaved]]) {
-//        return cell;
-//    } else {
-        cell.nameLabel.text = tempCurrency.abbrev;
-        cell.fullNameLabel.text = tempCurrency.fullName;
-        cell.flagImageView.image = [UIImage imageNamed:tempCurrency.icon];
-        RateHistory* tempCurrencyRate =
-        [dataBaseManager.fetchedRateHistory firstObject];
-        CurrencyCalculation* calculation = [CurrencyCalculation new];
-        double resultRate = [calculation
-                             convertNumber:[self.currencyAmount.text doubleValue]
-                             OfCurrency:[tempCurrencyRate valueForKey:[self.mainName.text lowercaseString]]
-                             into:[tempCurrencyRate valueForKey:[tempCurrency.abbrev lowercaseString]]];
-        cell.sumLabel.text = [NSString stringWithFormat:@"%.3f", resultRate];
-        return cell;
-  //  }
+    cell.nameLabel.text = tempCurrency.abbrev;
+    cell.fullNameLabel.text = tempCurrency.fullName;
+    cell.flagImageView.image = [UIImage imageNamed:tempCurrency.icon];
+    RateHistory* tempCurrencyRate =
+    [dataBaseManager.fetchedRateHistory firstObject];
+    CurrencyCalculation* calculation = [CurrencyCalculation new];
+    double resultRate = [calculation
+                         convertNumber:[self.currencyAmount.text doubleValue]
+                         OfCurrency:[tempCurrencyRate valueForKey:[self.mainName.text lowercaseString]]
+                         into:[tempCurrencyRate valueForKey:[tempCurrency.abbrev lowercaseString]]];
+    cell.sumLabel.text = [NSString stringWithFormat:@"%.3f", resultRate];
+    return cell;
+    //  }
 }
 
 - (void)refreshTheMainTableView {
     [RefreshData refreshTableViewWithCompletionHandler:^(BOOL success) {
         if (success){
-            [self.refreshControl endRefreshing];
+            [self.myTableView reloadData];
         }
-        [self.myTableView reloadData];
+        
+        [self.refreshControl endRefreshing];
     }];
 }
 
@@ -118,10 +121,10 @@ forRowAtIndexPath:(NSIndexPath*)indexPath {
 -(void)firstLoadOfApplication {
     [AppLaunchDefaultManager rememberAboutApplicationLaunchWithKey];
     [DataBaseManager startWorkWithCurrencyRateAplication];
+    
     dataBaseManager = [DataBaseManager sharedManager];
     [[dataBaseManager.fetchedRateHistory firstObject] setMainCurrencySaved:[dataBaseManager.arrayOfAllCurrencyInfo firstObject]];
     [self  setTheMainCurrency:[[dataBaseManager.fetchedRateHistory firstObject] mainCurrencySaved]];
-    [self.myTableView reloadData];
 }
 
 -(void) makeApplicationMoreStylish {
@@ -129,6 +132,7 @@ forRowAtIndexPath:(NSIndexPath*)indexPath {
     self.myTableView.backgroundColor = [UIColor clearColor];
     self.navigationController.navigationBar.titleTextAttributes =
     @{NSForegroundColorAttributeName : [UIColor whiteColor] };
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 }
 
 -(void)createTableViewSwipeDownRefresh {
@@ -157,29 +161,29 @@ forRowAtIndexPath:(NSIndexPath*)indexPath {
         [self.view addSubview:self.mainFullName];
         [AnimationFile addFallAnimationForLayer:self.mainFullName.layer];
         
-        if ([dataBaseManager.selectedCurrencies containsObject:[object mainCurrencySaved]]) {
-            
-        }
+        //        if ([dataBaseManager.selectedCurrencies containsObject:[object mainCurrencySaved]]) {
+        //
+        //        }
     }
-//    if ([keyPath isEqualToString:@"checked"]) {
-//        NSNumber *newCheck = [change objectForKey:NSKeyValueChangeNewKey];
-//        if (([newCheck  isEqual: @(YES)])&&(![object isEqual
-//                                          :[[dataBaseManager.fetchedRateHistory firstObject] mainCurrencySaved]])) {
-//            [dataBaseManager.selectedCurrencies addObject:object];
-//        } else {
-//            [dataBaseManager.selectedCurrencies removeObject:object];
-//        }
-//    }
+    //    if ([keyPath isEqualToString:@"checked"]) {
+    //        NSNumber *newCheck = [change objectForKey:NSKeyValueChangeNewKey];
+    //        if (([newCheck  isEqual: @(YES)])&&(![object isEqual
+    //                                          :[[dataBaseManager.fetchedRateHistory firstObject] mainCurrencySaved]])) {
+    //            [dataBaseManager.selectedCurrencies addObject:object];
+    //        } else {
+    //            [dataBaseManager.selectedCurrencies removeObject:object];
+    //        }
+    //    }
 }
 
 -(void)setObservingForMainCurrencyAndCheckmarks {
     [[dataBaseManager.fetchedRateHistory firstObject]addObserver:self
                                                       forKeyPath:@"mainCurrencySaved"
                                                          options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
-//    for (CurrencyInfo *temp in dataBaseManager.arrayOfAllCurrencyInfo ) {
-//        [temp addObserver:self forKeyPath:@"checked"
-//                  options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
-//    }
+    //    for (CurrencyInfo *temp in dataBaseManager.arrayOfAllCurrencyInfo ) {
+    //        [temp addObserver:self forKeyPath:@"checked"
+    //                  options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
+    //    }
 }
 
 @end

@@ -33,6 +33,6 @@
 @interface RateHistory (CoreDataGeneratedAccessors)
 
 +(void) rewriteEntityObject :(RateHistory*)objectToRewrite withAcceptedData:(NSMutableDictionary*)dict;
-+(void) newEntityObject :(NSMutableDictionary*)dict;
++ (RateHistory*)newEntityObject :(NSMutableDictionary*)dict;
 
 @end

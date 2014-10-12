@@ -16,9 +16,9 @@
     static DataBaseManager *sharedDataBaseManager = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-       sharedDataBaseManager = [[DataBaseManager alloc] init];
+        sharedDataBaseManager = [[DataBaseManager alloc] init];
         
-     });
+    });
     
     return sharedDataBaseManager;
 }
@@ -60,22 +60,15 @@
 }
 // fill the DB when the app is launched for the first time
 +(void)startWorkWithCurrencyRateAplication{
-    [CurrencyInfo firstCurrencyInfoInitialization];                         // creating currency information entity
-
-    NSMutableDictionary *result = [ParsingDataFromYahoo synchronousRequest];
-    if (result) {
-        [RateHistory newEntityObject:result];
-    }else {
-        [AlertDisplay emptyDataBaseAlertViewDisplay];    // displaynig the relevant alert
-    }
-//    [ParsingDataFromYahoo
-//     asynchronousRequestWithcompletionHandler: ^(NSMutableDictionary *rateDict) {           // implementing the asynchronous
-//         if (rateDict != nil) {
-//             [RateHistory newEntityObject:rateDict];
-//             completionHandler(YES);
-//         } else {
-//            [AlertDisplay emptyDataBaseAlertViewDisplay];
-//        }
-//    }];
+    [CurrencyInfo firstCurrencyInfoInitialization];
+    // creating currency information entity
+    RateHistory * tmp = [RateHistory newEntityObject:nil];
+    
+    [ParsingDataFromYahoo
+     asynchronousRequestWithcompletionHandler: ^(NSMutableDictionary *rateDict) {           // implementing the asynchronous
+         if (rateDict != nil)
+             [RateHistory rewriteEntityObject:tmp withAcceptedData:rateDict];
+         
+     }];
 }
 @end

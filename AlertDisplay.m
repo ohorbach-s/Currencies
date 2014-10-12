@@ -19,18 +19,11 @@
     
     NSDate *tempDate =
     [[dataBaseManager.fetchedRateHistory firstObject] date];
+    NSString *abbrev = [[dataBaseManager.fetchedRateHistory firstObject] valueForKey:@"uah"];
     
     NSString *strMyDate = [dateFormatter stringFromDate:tempDate];
     
-    if (tempDate == nil) {
-        UIAlertView *message = [[UIAlertView alloc]
-                                initWithTitle:@"No Internet connection"
-                                message:nil
-                                delegate:nil
-                                cancelButtonTitle:@"Okay :C"
-                                otherButtonTitles:nil];
-        [message show];
-    } else {
+    if(abbrev!=nil){
         NSString *datestring = [NSString
                                 stringWithFormat:@"Data is valid for %@", strMyDate];
         UIAlertView *message = [[UIAlertView alloc]
@@ -40,7 +33,8 @@
                                 cancelButtonTitle:@"Okay"
                                 otherButtonTitles:nil];
         [message show];
-    }
+    } else
+        [self emptyDataBaseAlertViewDisplay];
 }
 
 +(void) emptyDataBaseAlertViewDisplay {
