@@ -15,7 +15,7 @@
 @dynamic checked;
 @dynamic rate;
 
-
+//creating currencyInfo entity
 + (void)firstCurrencyInfoInitialization {
     UsedData *getData = [[UsedData alloc] initData];
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];

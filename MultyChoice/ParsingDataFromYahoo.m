@@ -54,8 +54,7 @@
      }];
 }
 // implementing the synchronous request for the background update
-+ (NSMutableDictionary*)synchronousRequest {                         ////add alert view, if it need
-    
++ (NSMutableDictionary*)synchronousRequest {
     NSArray* returnedRate = nil;
     NSURL* url;
     NSMutableDictionary* pairResult = [NSMutableDictionary new];

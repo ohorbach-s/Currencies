@@ -11,7 +11,7 @@
 
 
 @implementation AlertDisplay
-
+//show alert message in case there is no Internet connection
 +(void) noInternetAlertViewDisplay {
     DataBaseManager *dataBaseManager = [DataBaseManager sharedManager]; //// ????
     NSDateFormatter *dateFormatter = [NSDateFormatter new];
@@ -36,7 +36,8 @@
     } else
         [self emptyDataBaseAlertViewDisplay];
 }
-
+//show alert message in case the app is launched for the first time, hence the database is empty
+//and there is nothing to show and to calculate
 +(void) emptyDataBaseAlertViewDisplay {
     UIAlertView *message = [[UIAlertView alloc]
                             initWithTitle:@"No Internet connection"

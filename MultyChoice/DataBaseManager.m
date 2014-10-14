@@ -32,6 +32,7 @@
     }
     return self;
 }
+//filling arrays of currency info and rate history which will be used throughout the app usage
 - (void)extractDataBase {
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     NSManagedObjectContext *context = [appDelegate managedObjectContext];

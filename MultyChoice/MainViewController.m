@@ -18,8 +18,6 @@ static NSString *addSegueIdentifier = @"Add";
 @implementation MainViewController
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    
     [self makeApplicationMoreStylish];
     if (![AppLaunchDefaultManager checkApplicationLaunch]) {
         [self firstLoadOfApplication];
@@ -32,6 +30,7 @@ static NSString *addSegueIdentifier = @"Add";
     [self createTableViewSwipeDownRefresh];
     self.shownIndexes = [NSMutableSet set];
     [self setObservingForMainCurrencyAndCheckmarks];
+    //[self.currencyAmount textField:<#(UITextField *)#> shouldChangeCharactersInRange:<#(NSRange)#> replacementString:self.currencyA]
     
 }
 
@@ -39,9 +38,21 @@ static NSString *addSegueIdentifier = @"Add";
     [self.myTableView reloadData];
 }
 
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    NSArray  *arrayOfString = [newString componentsSeparatedByString:@"."];
+    
+    if ([arrayOfString count] > 2 )
+        return NO;
+    
+    return YES;
+}
+
+
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
     [self.currencyAmount customButton];
 }
+//animated appearance
 - (void)viewWillAppear:(BOOL)animated {
     [AnimationFile animateTableViewAppearance:self.myTableView];
     [dataBaseManager.selectedCurrencies removeAllObjects];
@@ -52,17 +63,23 @@ static NSString *addSegueIdentifier = @"Add";
     }
     [self.myTableView reloadData];
 }
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue*)segue sender:(id)sender {
-    //UINavigationController* navigationController = segue.destinationViewController;
-    
-    SelectionListViewController* controller = segue.destinationViewController;    //[[navigationController viewControllers] firstObject];
+    SelectionListViewController* controller = segue.destinationViewController;
     if ([segue.identifier isEqualToString:mainSegueIdentifier]) {
         controller.selectedMainSegue = YES;
     }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self.currencyAmount resignFirstResponder];
+    self.currencyAmount.text = @"1";
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
 }
 
 - (NSInteger)tableView:(UITableView*)tableView
@@ -87,7 +104,6 @@ static NSString *addSegueIdentifier = @"Add";
                          into:[tempCurrencyRate valueForKey:[tempCurrency.abbrev lowercaseString]]];
     cell.sumLabel.text = [NSString stringWithFormat:@"%.3f", resultRate];
     return cell;
-    //  }
 }
 
 - (void)refreshTheMainTableView {
@@ -95,11 +111,10 @@ static NSString *addSegueIdentifier = @"Add";
         if (success){
             [self.myTableView reloadData];
         }
-        
         [self.refreshControl endRefreshing];
     }];
 }
-
+//rows deletion
 - (void)tableView:(UITableView*)tableView
 commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
 forRowAtIndexPath:(NSIndexPath*)indexPath {
@@ -111,13 +126,13 @@ forRowAtIndexPath:(NSIndexPath*)indexPath {
                          withRowAnimation:UITableViewRowAnimationBottom];
     }
 }
-
+//the main currency output on the view
 -(void) setTheMainCurrency: (CurrencyInfo *)main {
     self.mainName.text = main.abbrev;
     self.mainFullName.text = main.fullName;
     self.mainImage.image = [UIImage imageNamed:main.icon];
 }
-
+//performing entities creation and filling all the necessary arrays
 -(void)firstLoadOfApplication {
     [AppLaunchDefaultManager rememberAboutApplicationLaunchWithKey];
     [DataBaseManager startWorkWithCurrencyRateAplication];
@@ -126,7 +141,7 @@ forRowAtIndexPath:(NSIndexPath*)indexPath {
     [[dataBaseManager.fetchedRateHistory firstObject] setMainCurrencySaved:[dataBaseManager.arrayOfAllCurrencyInfo firstObject]];
     [self  setTheMainCurrency:[[dataBaseManager.fetchedRateHistory firstObject] mainCurrencySaved]];
 }
-
+//creating app's 'outfit'
 -(void) makeApplicationMoreStylish {
     self.view.backgroundColor =[UIColor colorWithPatternImage:[UIImage imageNamed:backgroundImage]];
     self.myTableView.backgroundColor = [UIColor clearColor];
@@ -134,14 +149,14 @@ forRowAtIndexPath:(NSIndexPath*)indexPath {
     @{NSForegroundColorAttributeName : [UIColor whiteColor] };
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 }
-
+//performing manual refresh
 -(void)createTableViewSwipeDownRefresh {
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(refreshTheMainTableView)
                   forControlEvents:UIControlEventValueChanged];
     [self.myTableView addSubview:self.refreshControl];
 }
-
+//setting the relation with the text field, performing input validation
 -(void) linkToTextField {
     self.currencyAmount.text = @"1";
     self.currencyAmount.reloadDelegate = self;
@@ -149,7 +164,7 @@ forRowAtIndexPath:(NSIndexPath*)indexPath {
                             action:@selector(checkTyping)
                   forControlEvents:UIControlEventEditingChanged];
 }
-
+//setting the necessary performance in case of observed property being changed (animation + output)
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object
                        change:(NSDictionary *)change context:(void *)context {
     if ([keyPath isEqualToString:@"mainCurrencySaved"]) {
@@ -157,33 +172,19 @@ forRowAtIndexPath:(NSIndexPath*)indexPath {
         self.mainFullName.text = [object mainCurrencySaved].fullName;
         self.mainImage.image = [UIImage imageNamed:[object mainCurrencySaved].icon];
         [self.view addSubview:self.mainImage];
-        [AnimationFile addFallAnimationForLayer:self.mainImage.layer];
-        [self.view addSubview:self.mainFullName];
-        [AnimationFile addFallAnimationForLayer:self.mainFullName.layer];
-        
-        //        if ([dataBaseManager.selectedCurrencies containsObject:[object mainCurrencySaved]]) {
-        //
-        //        }
+        [AnimationFile addRotateAnimationForLayer:self.mainImage.layer];
     }
-    //    if ([keyPath isEqualToString:@"checked"]) {
-    //        NSNumber *newCheck = [change objectForKey:NSKeyValueChangeNewKey];
-    //        if (([newCheck  isEqual: @(YES)])&&(![object isEqual
-    //                                          :[[dataBaseManager.fetchedRateHistory firstObject] mainCurrencySaved]])) {
-    //            [dataBaseManager.selectedCurrencies addObject:object];
-    //        } else {
-    //            [dataBaseManager.selectedCurrencies removeObject:object];
-    //        }
-    //    }
 }
-
+//setting observance over the main currency (KVO)
 -(void)setObservingForMainCurrencyAndCheckmarks {
     [[dataBaseManager.fetchedRateHistory firstObject]addObserver:self
                                                       forKeyPath:@"mainCurrencySaved"
                                                          options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
-    //    for (CurrencyInfo *temp in dataBaseManager.arrayOfAllCurrencyInfo ) {
-    //        [temp addObserver:self forKeyPath:@"checked"
-    //                  options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
-    //    }
+    
+}
+-(void)dealloc {
+ [[dataBaseManager.fetchedRateHistory firstObject] removeObserver:self
+                                                       forKeyPath:@"mainCurrencySaved"];
 }
 
 @end
