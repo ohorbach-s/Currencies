@@ -11,12 +11,12 @@
 static NSString *appLauchKey = @"HasLaunchedOnce";
 
 @implementation AppLaunchDefaultManager
-//check whether the application is launched for the first time
+
 +(BOOL)checkApplicationLaunch {
-    BOOL result = [[NSUserDefaults standardUserDefaults] boolForKey:appLauchKey];
-    return result;
+    BOOL rezult = [[NSUserDefaults standardUserDefaults] boolForKey:appLauchKey];
+    return rezult;
 }
-//setting the laucnh state  (for the first time or for n-time)
+
 +(void)rememberAboutApplicationLaunchWithKey {
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:appLauchKey];
     [[NSUserDefaults standardUserDefaults] synchronize];

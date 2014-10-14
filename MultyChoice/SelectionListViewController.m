@@ -22,6 +22,7 @@ extern NSString *cellIdentifier;
     [super viewDidLoad];
     dataBaseManager = [DataBaseManager sharedManager];
     [self makeApplicationMoreStylish];
+    [self makeAnimation];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
 }
 
@@ -32,10 +33,6 @@ extern NSString *cellIdentifier;
 - (NSInteger)tableView:(UITableView *)tableView
  numberOfRowsInSection:(NSInteger)section {
     return [dataBaseManager.arrayOfAllCurrencyInfo count];
-}
-//animated appearance
--(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    [AnimationFile displaySecondTable:cell :indexPath];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
@@ -61,13 +58,13 @@ extern NSString *cellIdentifier;
 - (void)tableView:(UITableView *)tableView
 didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     [AnimationFile shakeAnimation:cell];
     CurrencyInfo *exemplair = [dataBaseManager.arrayOfAllCurrencyInfo
                                objectAtIndex:indexPath.row];
     if (self.selectedMainSegue) {
         [[dataBaseManager.fetchedRateHistory firstObject] setMainCurrencySaved:exemplair];
         [self.navigationController popViewControllerAnimated:YES];
+        //        [self.navigationController popViewControllerAnimated:YES];
     } else {
         if (cell.accessoryType == UITableViewCellAccessoryNone) {
             cell.accessoryType = UITableViewCellAccessoryCheckmark;
@@ -78,7 +75,32 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
         }
     }
 }
-//setting the application 'outfit'
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath
+                :(NSIndexPath *)indexPath {
+    if (![self.shownIndexes containsObject:indexPath]) {
+        [self.shownIndexes addObject:indexPath];
+        cell.layer.transform = self.initialTransformation;
+        cell.layer.opacity = 1.8;
+        [UIView animateWithDuration:0.7 animations:^{
+            cell.layer.transform = CATransform3DIdentity;
+            cell.layer.opacity = 1;
+        }];
+    }
+}
+
+-(void)makeAnimation {
+    CGFloat rotationAngleDegrees = -15;
+    CGFloat rotationAngleRadians = rotationAngleDegrees * (M_PI/180);
+    CGPoint offsetPositioning = CGPointMake(-20, -20);
+    
+    CATransform3D transform = CATransform3DIdentity;
+    transform = CATransform3DRotate(transform, rotationAngleRadians, 0.0, 0.0, 1.0);
+    transform = CATransform3DTranslate(transform, offsetPositioning.x, offsetPositioning.y, 0.0);
+    _initialTransformation = transform;
+    _shownIndexes = [NSMutableSet set];
+}
+
 -(void) makeApplicationMoreStylish {
     self.navigationController.navigationBar.titleTextAttributes =
     @{NSForegroundColorAttributeName : [UIColor whiteColor]};

@@ -9,7 +9,7 @@
 #import "RefreshData.h"
 
 @implementation RefreshData
-//manual refresh
+
 + (void)refreshTableViewWithCompletionHandler:(void (^)(BOOL ))completionHandler {
     DataBaseManager *dataBaseManager = [DataBaseManager sharedManager];
     RateHistory *exemplair = [dataBaseManager.fetchedRateHistory firstObject];
@@ -20,7 +20,7 @@
         } else completionHandler(NO);
     }];
 }
-//performing refresh in background mode
+
 + (void) backgroundRefresh:(void (^)(UIBackgroundFetchResult))completionHanler {
     DataBaseManager *dataBaseManager = [DataBaseManager sharedManager];
     RateHistory *exemplair = [dataBaseManager.fetchedRateHistory firstObject];
